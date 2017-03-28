@@ -3,18 +3,37 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
+import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
+import { HselectionComponent } from './hselection/hselection.component';
+
+import { HselectionService } from './hselection.service';
+
+// Define the routes
+const ROUTES = [
+  {
+    path: '',
+    redirectTo: 'hselection',
+    pathMatch: 'full'
+  },
+  {
+    path: 'hselection',
+    component: HselectionComponent
+  }
+];
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HselectionComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    HttpModule
+    HttpModule,
+    RouterModule.forRoot(ROUTES) // Add routes to the app
   ],
-  providers: [],
+  providers: [HselectionService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
