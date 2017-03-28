@@ -15,13 +15,15 @@ export class HselectionComponent implements OnInit {
   selectedcountry:string = "Country";
   selectedstate:string = "State";
   selectedcity:string = "City";
+  fromDate:string;
+  toDate:string;
   constructor(private hselectionService:HselectionService){}
 
   ngOnInit() {
   this.hselectionService.getAllCountries().subscribe(countries =>
 	  {
 	  	this.countries = countries.theList;
-	  }); 
+	  });
   }
 
   countrySelect(country){
@@ -30,7 +32,7 @@ export class HselectionComponent implements OnInit {
 
     this.states = states.theList;
     this.selectedcountry = country;
-    
+
   });
   }
 
@@ -40,5 +42,24 @@ export class HselectionComponent implements OnInit {
     this.cities = cities.theList;
     this.selectedstate = state;
   });
+  }
+
+  citySelect(city) {
+    this.selectedcity = city;
+  }
+
+  fetchHolidays(event){
+    event.preventDefault();
+    console.log(this.toDate);
+    console.log(this.fromDate);
+    var data = {
+      country : this.selectedcountry,
+      state: this.selectedstate,
+      city: this.selectedcity,
+      fromDate: this.fromDate,
+      toDate: this.toDate
+    };
+    this.hselectionService.getHolidays(data);
+
   }
 }

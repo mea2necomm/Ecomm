@@ -23,4 +23,8 @@ export class HselectionService {
   return this.http.get('/api/countryStateCities/'+state + '/' + country)
   .map(res => res.json());
   }
+
+  getHolidays(data){
+    console.log(data);
+  }
 }

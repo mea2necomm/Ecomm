@@ -1,38 +1,55 @@
 <div class="container">
+
+<div class="col-md-4">
 <div class="dropdown">
-  <button id="dLabel" class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="btncountry">
+  <button id="country" class="btn btn-primary dropdown-toggle btn-block" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="btncountry">
     {{selectedcountry}}
     <span class="caret"></span>
   </button>
-  <ul class="dropdown-menu" aria-labelledby="dLabel">
+  <ul class="dropdown-menu scrollable-menu col-xs-12" aria-labelledby="dLabel">
      <li *ngFor="let country of countries" href="#" (click)= countrySelect(country)>
     	{{country}}
   	</li>
   </ul>
 </div>
+</div>
 
+<div class="col-md-4">
 <div class="dropdown">
-  <button id="dLabel" class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="btnstate">
+  <button id="state" class="btn btn-primary dropdown-toggle btn-block" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="btnstate">
     {{selectedstate}}
     <span class="caret"></span>
   </button>
-  <ul class="dropdown-menu" aria-labelledby="dLabel">
+  <ul class="dropdown-menu scrollable-menu col-xs-12" aria-labelledby="dLabel">
      <li *ngFor="let state of states" href="#" (click)= stateSelect(state)>
     	{{state}}
   	</li>
   </ul>
 </div>
+</div>
 
+<div class="col-md-4">
 <div class="dropdown">
-  <button id="dLabel" class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="btncity">
+  <button id="city" class="btn btn-primary dropdown-toggle btn-block" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="btncity">
     {{selectedcity}}
     <span class="caret"></span>
   </button>
-  <ul class="dropdown-menu" aria-labelledby="dLabel">
-     <li *ngFor="let city of cities" href="#" >
+  <ul class="dropdown-menu scrollable-menu col-xs-12" aria-labelledby="dLabel">
+     <li *ngFor="let city of cities" href="#" (click)= citySelect(city)>
     	{{city}}
   	</li>
   </ul>
 </div>
-    
+</div>
+
+  <form class="form-inline" (submit)="fetchHolidays($event)">
+    <fieldset>
+      <div class="form-group">
+        <input [(ngModel)]="fromDate" name = "fromDate" class="form-control" id="fromDate" placeholder="From (YYYY)" type="text">
+        <input [(ngModel)]="toDate" name = "toDate" class="form-control" id="toDate" placeholder="To (YYYY)" type="text">
+        <button type="submit" class="btn btn-primary" (submit)="fetchHolidays($event)">Fetch</button>
+      </div>
+    </fieldset>
+  </form>
+
 </div>
