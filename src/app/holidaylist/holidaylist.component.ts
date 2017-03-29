@@ -15,19 +15,26 @@ export class HolidaylistComponent implements OnInit {
   todate : any;
   paramsSub: any;
   holidays : any =[];
-
+  businessesClosed:string;
+  banksClosed:string;
+  religiousHoliday:string;
+  religion:string;
   constructor(private activatedRoute: ActivatedRoute, private hselectionService:HselectionService) { }
 
   ngOnInit() {
-    console.log("in holiday list service");
     this.paramsSub = this.activatedRoute.params.subscribe(params => {
 
       this.country = params['country'];
       this.state = params['state'];
+      if(this.state == 'State'){
+        this.state = 'none';
+      }
       this.city = params['city'];
+      if(this.city == 'City'){
+        this.city = 'none';
+      }
       this.fromdate = params['fromdate'];
       this.todate = params['todate'];
-      console.log(this.country);
       var data = {
         country : this.country,
         state: this.state,
@@ -44,6 +51,14 @@ export class HolidaylistComponent implements OnInit {
 
 
 
+  }
+
+  setholiday(holiday){
+    console.log(holiday);
+    this.businessesClosed = holiday.businessesClosed;
+    this.banksClosed = holiday.banksClosed;
+    this.religiousHoliday = holiday.religiousHoliday;
+    this.religion = holiday.religion;
   }
 
 }

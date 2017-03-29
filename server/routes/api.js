@@ -108,7 +108,6 @@ router.get('/countryStateCities/:state/:country', (req, res) => {
 });
 
 router.get('/holidays/:country/:state/:city/:fromdate/:todate', (req, res) => {
-  console.log(holidaysUrl+ req.params.country+'/'+req.params.state+'/'+req.params.city+'/'+req.params.fromdate+'/1/1/'+req.params.todate+'/12/31');
   request.get(
     { url: holidaysUrl+ req.params.country+'/'+req.params.state+'/'+req.params.city+'/'+req.params.fromdate+'/1/1/'+req.params.todate+'/12/31',
       method:'Get'
