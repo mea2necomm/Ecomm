@@ -6,32 +6,24 @@ import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { HselectionComponent } from './hselection/hselection.component';
+import { routes } from './app.routes';
 
 import { HselectionService } from './hselection.service';
+import { HolidaylistComponent } from './holidaylist/holidaylist.component';
 
 // Define the routes
-const ROUTES = [
-  {
-    path: '',
-    redirectTo: 'hselection',
-    pathMatch: 'full'
-  },
-  {
-    path: 'hselection',
-    component: HselectionComponent
-  }
-];
 
 @NgModule({
   declarations: [
     AppComponent,
-    HselectionComponent
+    HselectionComponent,
+    HolidaylistComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
-    RouterModule.forRoot(ROUTES) // Add routes to the app
+    RouterModule.forRoot(routes) // Add routes to the app
   ],
   providers: [HselectionService],
   bootstrap: [AppComponent]
