@@ -12,6 +12,7 @@ export class HselectionComponent implements OnInit {
 	countries: any = [];
   states: any = [];
   cities: any = [];
+  holidays: any = [];
   selectedcountry:string = "Country";
   selectedstate:string = "State";
   selectedcity:string = "City";
@@ -52,6 +53,12 @@ export class HselectionComponent implements OnInit {
     event.preventDefault();
     console.log(this.toDate);
     console.log(this.fromDate);
+    if(!this.selectedstate){
+      this.selectedstate = 'none';
+    }
+    if(!this.selectedcity){
+      this.selectedcity = 'none';
+    }
     var data = {
       country : this.selectedcountry,
       state: this.selectedstate,
@@ -59,7 +66,13 @@ export class HselectionComponent implements OnInit {
       fromDate: this.fromDate,
       toDate: this.toDate
     };
-    this.hselectionService.getHolidays(data);
+    this.hselectionService.getHolidays(data).subscribe(holidays =>
+    {
+      ;
+      this.holidays = holidays.theList;
+      console.log(this.holidays);
+    });
+
 
   }
 }

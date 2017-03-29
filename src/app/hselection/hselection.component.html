@@ -41,15 +41,19 @@
   </ul>
 </div>
 </div>
+</div>
 
-  <form class="form-inline" (submit)="fetchHolidays($event)">
+
+<div class="row">
+  <div class="col-xs-12">
+  <form class="form-inline text-center" (submit)="fetchHolidays($event)">
     <fieldset>
       <div class="form-group">
         <input [(ngModel)]="fromDate" name = "fromDate" class="form-control" id="fromDate" placeholder="From (YYYY)" type="text">
         <input [(ngModel)]="toDate" name = "toDate" class="form-control" id="toDate" placeholder="To (YYYY)" type="text">
-        <button type="submit" class="btn btn-primary" (submit)="fetchHolidays($event)">Fetch</button>
+        <button type="submit" class="btn btn-primary form-control" (submit)="fetchHolidays($event)">Fetch</button>
       </div>
     </fieldset>
   </form>
-
+  </div>
 </div>

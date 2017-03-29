@@ -4,10 +4,11 @@ const request = require('request');
 
 // declare axios for making http requests
 const API = 'https://jsonplaceholder.typicode.com';
-const baseURL = 'http://www.worldholidaysandevents.com/HolidaysRESTJSON/webresources/holidaysandevents'
+const baseURL = 'http://www.worldholidaysandevents.com/HolidaysRESTJSON/webresources/holidaysandevents';
 const contriesUrl = baseURL+'/countries';
 const statesUrl = baseURL+'/countryStates/';
 const citiesUrl = baseURL+'/countryStateCities/';
+const holidaysUrl = baseURL+'/holidaysAndEvents/';
 /* GET api listing. */
 router.get('/', (req, res) => {
   res.send('api works');
@@ -29,13 +30,13 @@ router.get('/posts', (req, res) => {
 
 router.get('/posts', (req, res) => {
 
-  request.get( 
+  request.get(
         { url: 'https://jsonplaceholder.typicode.com/posts',
         method:'Get'
         },
         function (error, apires, body) {
           if (error) {
-          	res.status(500).send(error); 
+          	res.status(500).send(error);
           }
 
             if (apires.statusCode != 200 ) {
@@ -44,18 +45,18 @@ router.get('/posts', (req, res) => {
 
             res.status(200).json(body);
         }
-      );	
+      );
 
 });
 
 router.get('/countries', (req, res) => {
-  request.get( 
+  request.get(
         { url: contriesUrl,
         method:'Get'
         },
         function (error, apires, body) {
           if (error) {
-          	res.status(500).send(error); 
+          	res.status(500).send(error);
           }
 
             if (apires.statusCode != 200 ) {
@@ -64,18 +65,18 @@ router.get('/countries', (req, res) => {
 
             res.status(200).send(body);
         }
-      );	
+      );
 
 });
 
 router.get('/countryStates/:country', (req, res) => {
-  request.get( 
+  request.get(
         { url: statesUrl+req.params.country,
         method:'Get'
         },
         function (error, apires, body) {
           if (error) {
-            res.status(500).send(error); 
+            res.status(500).send(error);
           }
 
             if (apires.statusCode != 200 ) {
@@ -84,17 +85,17 @@ router.get('/countryStates/:country', (req, res) => {
 
             res.status(200).send(body);
         }
-      );  
+      );
 });
 
 router.get('/countryStateCities/:state/:country', (req, res) => {
-  request.get( 
+  request.get(
         { url: citiesUrl+ req.params.country+'/'+req.params.state,
         method:'Get'
         },
         function (error, apires, body) {
           if (error) {
-            res.status(500).send(error); 
+            res.status(500).send(error);
           }
 
             if (apires.statusCode != 200 ) {
@@ -103,7 +104,27 @@ router.get('/countryStateCities/:state/:country', (req, res) => {
 
             res.status(200).send(body);
         }
-      );  
+      );
+});
+
+router.get('/holidays/:country/:state/:city/:fromdate/:todate', (req, res) => {
+  console.log(holidaysUrl+ req.params.country+'/'+req.params.state+'/'+req.params.city+'/'+req.params.fromdate+'/1/1/'+req.params.todate+'/12/31');
+  request.get(
+    { url: holidaysUrl+ req.params.country+'/'+req.params.state+'/'+req.params.city+'/'+req.params.fromdate+'/1/1/'+req.params.todate+'/12/31',
+      method:'Get'
+    },
+    function (error, apires, body) {
+      if (error) {
+        res.status(500).send(error);
+      }
+
+      if (apires.statusCode != 200 ) {
+        res.status(apires.statusCode).send(apires.statusCode);
+      }
+
+      res.status(200).send(body);
+    }
+  );
 });
 
 module.exports = router;

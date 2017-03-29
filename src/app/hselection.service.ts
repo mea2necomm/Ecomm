@@ -26,5 +26,8 @@ export class HselectionService {
 
   getHolidays(data){
     console.log(data);
+    console.log(data.country);
+    return this.http.get('/api/holidays/'+data.country + '/' + data.state+'/'+data.city+'/'+data.fromDate+'/'+data.toDate)
+      .map(res => res.json());
   }
 }
