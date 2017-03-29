@@ -68,7 +68,6 @@ export class HselectionComponent implements OnInit {
     };
     this.hselectionService.getHolidays(data).subscribe(holidays =>
     {
-      ;
       this.holidays = holidays.theList;
       console.log(this.holidays);
     });
