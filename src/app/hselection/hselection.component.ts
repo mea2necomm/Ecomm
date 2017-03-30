@@ -16,9 +16,11 @@ export class HselectionComponent implements OnInit {
   selectedcountry:string = "Country";
   selectedstate:string = "State";
   selectedcity:string = "City";
-  fromDate:string;
-  toDate:string;
-  constructor(private hselectionService:HselectionService){}
+  fromDate:number;
+  toDate:number;
+  submitenabled: boolean = false;
+  constructor(private hselectionService:HselectionService, ){
+  }
 
   ngOnInit() {
   this.hselectionService.getAllCountries().subscribe(countries =>
@@ -33,8 +35,18 @@ export class HselectionComponent implements OnInit {
 
     this.states = states.theList;
     this.selectedcountry = country;
+    this.submitenabled = true;
 
   });
+  }
+
+  enablesubmit(){
+    if(this.submitenabled && this.fromDate > 1200 && this.fromDate < 9999 && this.toDate > 1200 && this.toDate < 9999){
+      return false;
+    }
+    else{
+      return true;
+    }
   }
 
   stateSelect(state){

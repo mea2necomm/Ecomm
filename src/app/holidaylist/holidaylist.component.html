@@ -1,5 +1,11 @@
 <app-hselection></app-hselection>
-<div class="container">
+<div class="container" *ngIf="this.errorMessage">
+  <div class="alert alert-dismissible alert-danger">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    <strong>Oh snap!</strong> <a href="/" class="alert-link">Change a few things up</a> and try submitting again.
+  </div>
+</div>
+<div *ngIf="!this.errorMessage" class="container">
 <table class="table table-striped table-hover ">
   <thead>
   <tr>
