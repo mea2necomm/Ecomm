@@ -60,10 +60,12 @@ router.get('/countries', (req, res) => {
         function (error, apires, body) {
           if (error) {
           	res.status(500).send(error);
+          	return;
           }
 
             if (apires.statusCode != 200 ) {
               res.status(apires.statusCode).send(apires.statusCode);
+              return;
             }
 
             res.status(200).send(body);
@@ -80,10 +82,12 @@ router.get('/countryStates/:country', (req, res) => {
         function (error, apires, body) {
           if (error) {
             res.status(500).send(error);
+            return;
           }
 
             if (apires.statusCode != 200 ) {
               res.status(apires.statusCode).send(apires.statusCode);
+              return;
             }
 
             res.status(200).send(body);
@@ -99,10 +103,12 @@ router.get('/countryStateCities/:state/:country', (req, res) => {
         function (error, apires, body) {
           if (error) {
             res.status(500).send(error);
+            return;
           }
 
             if (apires.statusCode != 200 ) {
               res.status(apires.statusCode).send(apires.statusCode);
+              return;
             }
 
             res.status(200).send(body);
@@ -118,10 +124,12 @@ router.get('/holidays/:country/:state/:city/:fromdate/:todate', (req, res) => {
     function (error, apires, body) {
       if (error) {
         res.status(500).send(error);
+        return;
       }
 
       if (apires.statusCode != 200 ) {
         res.status(apires.statusCode).send(apires.statusCode);
+        return;
       }
 
       res.status(200).send(body);

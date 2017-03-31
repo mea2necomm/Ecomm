@@ -19,6 +19,7 @@ export class HolidaylistComponent implements OnInit {
   banksClosed:string;
   religiousHoliday:string;
   religion:string;
+  errorMessage:string;
   constructor(private activatedRoute: ActivatedRoute, private hselectionService:HselectionService) { }
 
   ngOnInit() {
@@ -42,11 +43,15 @@ export class HolidaylistComponent implements OnInit {
         fromDate: this.fromdate,
         toDate: this.todate
       };
-      this.hselectionService.getHolidays(data).subscribe(holidays =>
-      {
-        this.holidays = holidays.theList;
-        console.log(this.holidays);
-      });
+      this.hselectionService.getHolidays(data)
+        .subscribe(
+          holidays =>
+          {
+            this.holidays = holidays.theList;
+            console.log(this.holidays);
+          },
+          error => this.errorMessage = <any>error
+        );
     });
 
 
