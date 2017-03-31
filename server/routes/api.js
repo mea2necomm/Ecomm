@@ -1,8 +1,17 @@
 
+
 const express = require('express');
 const router = express.Router();
+var jwt = require('express-jwt');
 
+var auth = jwt({
+  secret:process.env.JWT_SECRET,
+  requestProperty: 'payload'
+});
+
+//controller routes to authentication pages
 var ctrlAuth = require('../controllers/authentication');
+var ctrlHoliday = require('../controllers/holiday');
 const request = require('request');
 
 // declare axios for making http requests
@@ -11,7 +20,7 @@ const baseURL = 'http://www.worldholidaysandevents.com/HolidaysRESTJSON/webresou
 const contriesUrl = baseURL+'/countries';
 const statesUrl = baseURL+'/countryStates/';
 const citiesUrl = baseURL+'/countryStateCities/';
-const holidaysUrl = baseURL+'/holidaysAndEvents/';
+
 /* GET api listing. */
 router.get('/', (req, res) => {
   res.send('api works');
@@ -115,27 +124,10 @@ router.get('/countryStateCities/:state/:country', (req, res) => {
         }
       );
 });
+//added auth to secure the holidays
+router.get('/holidays/:country/:state/:city/:fromdate/:todate', auth,
+  ctrlHoliday.findHolidays);
 
-router.get('/holidays/:country/:state/:city/:fromdate/:todate', (req, res) => {
-  request.get(
-    { url: holidaysUrl+ req.params.country+'/'+req.params.state+'/'+req.params.city+'/'+req.params.fromdate+'/1/1/'+req.params.todate+'/12/31',
-      method:'Get'
-    },
-    function (error, apires, body) {
-      if (error) {
-        res.status(500).send(error);
-        return;
-      }
-
-      if (apires.statusCode != 200 ) {
-        res.status(apires.statusCode).send(apires.statusCode);
-        return;
-      }
-
-      res.status(200).send(body);
-    }
-  );
-});
 
 router.post('/register',ctrlAuth.register);
 router.post('/login',ctrlAuth.login);
