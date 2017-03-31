@@ -1,5 +1,8 @@
+
 const express = require('express');
 const router = express.Router();
+
+var ctrlAuth = require('../controllers/authentication');
 const request = require('request');
 
 // declare axios for making http requests
@@ -125,5 +128,8 @@ router.get('/holidays/:country/:state/:city/:fromdate/:todate', (req, res) => {
     }
   );
 });
+
+router.post('/register',ctrlAuth.register);
+router.post('/login',ctrlAuth.login);
 
 module.exports = router;

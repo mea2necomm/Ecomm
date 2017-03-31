@@ -4,11 +4,12 @@ const path = require('path');
 const http = require('http');
 const bodyParser = require('body-parser');
 
+//require passport used for authentication service
+var passport = require('passport')
 // require the database so initial connection is established
 require('./server/models/db');
-
-
-
+//require the passport strategy
+require('./server/config/passport');
 
 // Get our API routes
 const api = require('./server/routes/api');
@@ -22,10 +23,12 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // Point static path to dist
 app.use(express.static(path.join(__dirname, 'dist')));
 
-
-
 //Set static folder
 app.use(express.static(path.join(__dirname,'src')));
+
+//Initialize passport after static pages but before the routes
+//that are going to use authentication
+app.use(passport.initialize());
 
 // Set our api routes
 app.use('/api', api);
