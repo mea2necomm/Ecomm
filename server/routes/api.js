@@ -6,7 +6,7 @@ var jwt = require('express-jwt');
 
 var auth = jwt({
   secret:process.env.JWT_SECRET,
-  requestProperty: 'payload'
+  userProperty: 'payload'
 });
 
 //controller routes to authentication pages

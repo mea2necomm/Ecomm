@@ -10,6 +10,8 @@ import { routes } from './app.routes';
 
 import { HselectionService } from './hselection.service';
 import { HolidaylistComponent } from './holidaylist/holidaylist.component';
+import { LoginComponent } from './login/login.component';
+import { AuthenticationService } from './authentication.service';
 
 // Define the routes
 
@@ -17,7 +19,8 @@ import { HolidaylistComponent } from './holidaylist/holidaylist.component';
   declarations: [
     AppComponent,
     HselectionComponent,
-    HolidaylistComponent
+    HolidaylistComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -25,7 +28,7 @@ import { HolidaylistComponent } from './holidaylist/holidaylist.component';
     HttpModule,
     RouterModule.forRoot(routes) // Add routes to the app
   ],
-  providers: [HselectionService],
+  providers: [HselectionService, AuthenticationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

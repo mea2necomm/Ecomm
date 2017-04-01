@@ -1,11 +1,12 @@
 var mongoose = require('mongoose');
 var User = mongoose.model('User');
+const request = require('request');
 
 const baseURL = 'http://www.worldholidaysandevents.com/HolidaysRESTJSON/webresources/holidaysandevents';
 const holidaysUrl = baseURL+'/holidaysAndEvents/';
 
 module.exports.findHolidays = function(req,res){
-  console.log('called the correct function')
+  console.log('called the correct function');
   getAuthor(req,res, function(req,res, userName){
     request.get(
       { url: holidaysUrl+ req.params.country+'/'+req.params.state+'/'+req.params.city+'/'+req.params.fromdate+'/1/1/'+req.params.todate+'/12/31',
@@ -27,7 +28,7 @@ module.exports.findHolidays = function(req,res){
     );
   });
 
-}
+};
 
 var getAuthor = function(req, res, callback) {
   console.log("Finding author with email " + req.payload.email);
@@ -47,7 +48,7 @@ var getAuthor = function(req, res, callback) {
           return;
         }
         console.log(user);
-        callback(req, res, user.name);
+        callback(req, res, user.email);
       });
 
   } else {

@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 
 import { HselectionComponent } from 'app/hselection/hselection.component';
 import { HolidaylistComponent } from 'app/holidaylist/holidaylist.component';
+import { LoginComponent } from 'app/login/login.component';
 
 export const routes: Routes = [
   {
@@ -20,5 +21,9 @@ export const routes: Routes = [
   {
     path : 'holidaylist/:country/:state/:city/:fromdate/:todate',
     component: HolidaylistComponent
+  },
+  {
+    path : 'login',
+    component: LoginComponent
   }
   ];

@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 
-import { Http } from '@angular/http';
+import { Http,RequestOptions,Headers } from '@angular/http';
+import { AuthenticationService } from './authentication.service';
 import 'rxjs/add/operator/map';
 
 @Injectable()
 export class HselectionService {
 
-  constructor(private http: Http) { }
+  constructor(private http: Http, private authentication: AuthenticationService) { }
 
   // Get all posts from the API
   getAllCountries() {
@@ -25,7 +26,11 @@ export class HselectionService {
   }
 
   getHolidays(data){
-    return this.http.get('/api/holidays/'+data.country + '/' + data.state+'/'+data.city+'/'+data.fromDate+'/'+data.toDate)
+    console.log(this.authentication.getToken());
+    let headers = new Headers({ 'Accept': 'application/json' });
+    headers.append('Authorization', 'Bearer '+ this.authentication.getToken());
+    let options = new RequestOptions({ headers: headers });
+    return this.http.get('/api/holidays/'+data.country + '/' + data.state+'/'+data.city+'/'+data.fromDate+'/'+data.toDate,options)
       .map(res => res.json());
   }
 }

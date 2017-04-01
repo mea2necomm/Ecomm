@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, Input} from '@angular/core';
 
 import { HselectionService } from '../hselection.service'
 
@@ -9,13 +9,17 @@ moduleId: module.id,
   styleUrls: ['./hselection.component.css']
 })
 export class HselectionComponent implements OnInit {
+  selectedcountry:string = "Country";
+  selectedstate:string = "State";
+  selectedcity:string = "City";
+  @Input() country: string;
+  @Input() state: string;
+  @Input() city: string;
 	countries: any = [];
   states: any = [];
   cities: any = [];
   holidays: any = [];
-  selectedcountry:string = "Country";
-  selectedstate:string = "State";
-  selectedcity:string = "City";
+
   fromDate:number;
   toDate:number;
   submitenabled: boolean = false;
@@ -23,7 +27,10 @@ export class HselectionComponent implements OnInit {
   }
 
   ngOnInit() {
-  this.hselectionService.getAllCountries().subscribe(countries =>
+    if(this.country){this.selectedcountry=this.country;}
+    if(this.state){this.selectedstate=this.state;}
+    if(this.city){this.selectedcity=this.city;}
+    this.hselectionService.getAllCountries().subscribe(countries =>
 	  {
 	  	this.countries = countries.theList;
 	  });

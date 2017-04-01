@@ -1,4 +1,8 @@
-<app-hselection></app-hselection>
+<app-hselection
+  [country] = "this.country"
+  [state] = "this.state"
+  [city] = "this.city"
+></app-hselection>
 <div class="container" *ngIf="this.errorMessage">
   <div class="alert alert-dismissible alert-danger">
     <button type="button" class="close" data-dismiss="alert">&times;</button>
