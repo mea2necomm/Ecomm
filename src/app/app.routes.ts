@@ -3,6 +3,7 @@ import { Routes } from '@angular/router';
 import { HselectionComponent } from 'app/hselection/hselection.component';
 import { HolidaylistComponent } from 'app/holidaylist/holidaylist.component';
 import { LoginComponent } from 'app/login/login.component';
+import {RegisterComponent} from "./register/register.component";
 
 export const routes: Routes = [
   {
@@ -25,5 +26,9 @@ export const routes: Routes = [
   {
     path : 'login',
     component: LoginComponent
+  },
+  {
+    path : 'register',
+    component: RegisterComponent
   }
   ];

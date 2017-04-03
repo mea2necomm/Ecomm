@@ -12,6 +12,8 @@ import { HselectionService } from './hselection.service';
 import { HolidaylistComponent } from './holidaylist/holidaylist.component';
 import { LoginComponent } from './login/login.component';
 import { AuthenticationService } from './authentication.service';
+import { RegisterComponent } from './register/register.component';
+import {CustomValidator} from "./equal-validator.directive";
 
 // Define the routes
 
@@ -20,7 +22,9 @@ import { AuthenticationService } from './authentication.service';
     AppComponent,
     HselectionComponent,
     HolidaylistComponent,
-    LoginComponent
+    LoginComponent,
+    RegisterComponent,
+    CustomValidator
   ],
   imports: [
     BrowserModule,
