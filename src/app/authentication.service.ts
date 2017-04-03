@@ -41,27 +41,21 @@ export class AuthenticationService {
       });
   }
 
-  register(useremail: string, password: string){
-    return this.http.post('/api/login', { email: useremail, password: password })
-      .map((response) => {
-        // login successful if there's a jwt token in the response
-        let token = response.json() && response.json().token;
-        if (token) {
+  register(user){
+    console.log(user);
+    return this.http.post('/api/register', { fname:user.firstName, lname : user.lastName, password : user.password, email : user.email})
+      .map(res =>{
+        let token = res.json() && res.json().token;
+        console.log(token);
+        if(token){
           this.saveToken(token);
-
-          // return true to indicate successful login
           return true;
-        } else {
-          // return false to indicate failed login
+        }else {
           return false;
         }
       })
-      .catch((error, caught) => {
-        if (error.status === 401) {
-          console.log(error);
-
-        }
-        return Observable.throw(error);
+      .catch((error, caught) =>{
+      return Observable.throw(error);
       });
   }
 
