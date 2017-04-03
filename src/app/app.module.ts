@@ -13,6 +13,7 @@ import { HselectionService } from './hselection.service';
 import { HolidaylistComponent } from './holidaylist/holidaylist.component';
 import { LoginComponent } from './login/login.component';
 import { AuthenticationService } from './authentication.service';
+import { NavbarComponent } from './navbar/navbar.component';
 import { RegisterComponent } from './register/register.component';
 import {CustomValidator} from "./equal-validator.directive";
 
@@ -24,6 +25,7 @@ import {CustomValidator} from "./equal-validator.directive";
     HselectionComponent,
     HolidaylistComponent,
     LoginComponent,
+    NavbarComponent,
     RegisterComponent,
     CustomValidator
   ],

@@ -18,7 +18,8 @@
 
 
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#">Link</a></li>
+        <li *ngIf="!authenticationService.isLoggedIn(); else loggedInBlock"><a href="/login">Login</a></li>
+        <ng-template #loggedInBlock>Welcome {{authenticationService.currentUser().email}} (<a href="/login" (click)="logout($event)">logout</a>)</ng-template>
       </ul>
     </div>
   </div>
