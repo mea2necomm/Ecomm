@@ -7,6 +7,7 @@ import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { HselectionComponent } from './hselection/hselection.component';
 import { routes } from './app.routes';
+import { AuthGuard } from './_gaurds/auth.gaurd';
 
 import { HselectionService } from './hselection.service';
 import { HolidaylistComponent } from './holidaylist/holidaylist.component';
@@ -32,7 +33,7 @@ import {CustomValidator} from "./equal-validator.directive";
     HttpModule,
     RouterModule.forRoot(routes) // Add routes to the app
   ],
-  providers: [HselectionService, AuthenticationService],
+  providers: [HselectionService, AuthenticationService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

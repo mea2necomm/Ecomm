@@ -4,6 +4,7 @@ import { HselectionComponent } from 'app/hselection/hselection.component';
 import { HolidaylistComponent } from 'app/holidaylist/holidaylist.component';
 import { LoginComponent } from 'app/login/login.component';
 import {RegisterComponent} from "./register/register.component";
+import { AuthGuard } from './_gaurds/auth.gaurd';
 
 export const routes: Routes = [
   {
@@ -21,7 +22,8 @@ export const routes: Routes = [
   },
   {
     path : 'holidaylist/:country/:state/:city/:fromdate/:todate',
-    component: HolidaylistComponent
+    component: HolidaylistComponent,
+    canActivate : [AuthGuard]
   },
   {
     path : 'login',
