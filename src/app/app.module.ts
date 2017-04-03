@@ -12,6 +12,7 @@ import { HselectionService } from './hselection.service';
 import { HolidaylistComponent } from './holidaylist/holidaylist.component';
 import { LoginComponent } from './login/login.component';
 import { AuthenticationService } from './authentication.service';
+import { NavbarComponent } from './navbar/navbar.component';
 
 // Define the routes
 
@@ -20,7 +21,8 @@ import { AuthenticationService } from './authentication.service';
     AppComponent,
     HselectionComponent,
     HolidaylistComponent,
-    LoginComponent
+    LoginComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
