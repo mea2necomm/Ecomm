@@ -12,7 +12,8 @@ export class NavbarComponent implements OnInit {
   currentUser:any;
 
   constructor(
-    private authenticationService: AuthenticationService
+    private authenticationService: AuthenticationService,
+    private router: Router
   ) {
     let curuser:any = authenticationService.currentUser();
     if(curuser !== false){
@@ -28,6 +29,7 @@ export class NavbarComponent implements OnInit {
   logout(event){
     event.preventDefault();
     this.authenticationService.logout();
+    this.router.navigate(['/']);
   }
 
 }
