@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { HselectionService } from '../hselection.service'
+import { HselectionService } from '../services/hselection.service'
 
 @Component({
   selector: 'app-holidaylist',
