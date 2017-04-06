@@ -1,5 +1,5 @@
 import { Component, OnInit ,ChangeDetectorRef} from '@angular/core';
-import { AuthenticationService } from '../authentication.service';
+import { AuthenticationService } from '../services/authentication.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -10,21 +10,16 @@ import { Router } from '@angular/router';
 export class NavbarComponent implements OnInit {
 
   currentUser:any;
-  isloggedin:boolean;
 
   constructor(
-    private authenticationService: AuthenticationService
+    private authenticationService: AuthenticationService,
+    private router: Router
   ) {
     let curuser:any = authenticationService.currentUser();
     if(curuser !== false){
       this.currentUser = curuser;
-      this.isloggedin =  true;
-    }else{
-      this.isloggedin = false;
     }
-
     //console.log("navbar-currentuser" + this.currentUser);
-
   }
 
   ngOnInit() {
@@ -32,11 +27,9 @@ export class NavbarComponent implements OnInit {
   }
 
   logout(event){
-    //event.preventDefault();
+    event.preventDefault();
     this.authenticationService.logout();
-    this.isloggedin = false;
-    //this.ref.reattach();
-    //this.router.navigate(['/']);
+    this.router.navigate(['/']);
   }
 
 }

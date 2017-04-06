@@ -1,6 +1,6 @@
 import {Component, OnInit, Input} from '@angular/core';
 
-import { HselectionService } from '../hselection.service'
+import { HselectionService } from '../services/hselection.service'
 
 @Component({
 moduleId: module.id,
