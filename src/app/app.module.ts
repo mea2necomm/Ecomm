@@ -10,6 +10,7 @@ import { routes } from './app.routes';
 import { AuthGuard } from './_gaurds/auth.gaurd';
 
 import { HselectionService } from './services/hselection.service';
+import { ShoppingcartService } from './services/shoppingcart.service';
 import { HolidaylistComponent } from './holidaylist/holidaylist.component';
 import { LoginComponent } from './login/login.component';
 import { AuthenticationService } from './services/authentication.service';
@@ -35,7 +36,7 @@ import {CustomValidator} from "./equal-validator.directive";
     HttpModule,
     RouterModule.forRoot(routes) // Add routes to the app
   ],
-  providers: [HselectionService, AuthenticationService, AuthGuard],
+  providers: [HselectionService, AuthenticationService, ShoppingcartService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
