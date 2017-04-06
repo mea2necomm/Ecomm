@@ -19,6 +19,7 @@ export class HselectionComponent implements OnInit {
   states: any = [];
   cities: any = [];
   holidays: any = [];
+  date: any;
 
   fromDate:number;
   toDate:number;
@@ -48,7 +49,7 @@ export class HselectionComponent implements OnInit {
   }
 
   enablesubmit(){
-    if(this.submitenabled && this.fromDate > 1200 && this.fromDate < 9999 && this.toDate > 1200 && this.toDate < 9999){
+    if(this.submitenabled && this.fromDate > 1200 && this.fromDate < 9999 && this.toDate > 1200 && this.toDate < 9999 && this.fromDate <= this.toDate){
       return false;
     }
     else{
@@ -56,6 +57,15 @@ export class HselectionComponent implements OnInit {
     }
   }
 
+  datecheck(){
+    this.date = new Date();
+    if(this.date.getFullYear() >= this.toDate){
+      return true;
+    }
+    else {
+      return false;
+    }
+  }
   stateSelect(state){
   this.hselectionService.getCities(state,this.selectedcountry).subscribe(cities =>
   {
