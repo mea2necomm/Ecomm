@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { HselectionService } from '../services/hselection.service'
+import { HselectionService } from '../../services/hselection.service'
 
 @Component({
   selector: 'app-holidaylist',
-  templateUrl: './holidaylist.component.html',
-  styleUrls: ['./holidaylist.component.css']
+  templateUrl: 'holidaylist.component.html',
+  styleUrls: ['holidaylist.component.css']
 })
 export class HolidaylistComponent implements OnInit {
   country: any;

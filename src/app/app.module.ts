@@ -5,18 +5,18 @@ import { HttpModule } from '@angular/http';
 
 import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
-import { HselectionComponent } from './hselection/hselection.component';
+import { HselectionComponent } from './components/hselection/hselection.component';
 import { routes } from './app.routes';
 import { AuthGuard } from './_gaurds/auth.gaurd';
 
 import { HselectionService } from './services/hselection.service';
 import { ShoppingcartService } from './services/shoppingcart.service';
-import { HolidaylistComponent } from './holidaylist/holidaylist.component';
-import { LoginComponent } from './login/login.component';
+import { HolidaylistComponent } from './components/holidaylist/holidaylist.component';
+import { LoginComponent } from './components/login/login.component';
 import { AuthenticationService } from './services/authentication.service';
-import { NavbarComponent } from './navbar/navbar.component';
-import { RegisterComponent } from './register/register.component';
-import {CustomValidator} from "./equal-validator.directive";
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { RegisterComponent } from './components/register/register.component';
+import { CustomValidator } from "./equal-validator.directive";
 
 // Define the routes
 

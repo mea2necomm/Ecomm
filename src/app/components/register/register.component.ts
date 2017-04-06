@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthenticationService } from '../services/authentication.service'
+import { AuthenticationService } from '../../services/authentication.service'
 import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-register',
-  templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css']
+  templateUrl: 'register.component.html',
+  styleUrls: ['register.component.css']
 })
 export class RegisterComponent implements OnInit {
   loading: boolean;

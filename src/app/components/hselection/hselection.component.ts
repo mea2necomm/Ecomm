@@ -1,12 +1,12 @@
 import {Component, OnInit, Input} from '@angular/core';
 
-import { HselectionService } from '../services/hselection.service'
+import { HselectionService } from '../../services/hselection.service'
 
 @Component({
 moduleId: module.id,
   selector: 'app-hselection',
-  templateUrl: './hselection.component.html',
-  styleUrls: ['./hselection.component.css']
+  templateUrl: 'hselection.component.html',
+  styleUrls: ['hselection.component.css']
 })
 export class HselectionComponent implements OnInit {
   selectedcountry:string = "Country";
