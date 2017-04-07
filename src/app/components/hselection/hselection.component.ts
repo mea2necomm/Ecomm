@@ -37,13 +37,8 @@ export class HselectionComponent implements OnInit {
 	  	this.countries = countries.theList;
 	  });
     this.hselectionService.getYear().subscribe( year =>{
-      console.log('from server');
-      console.log(year);
       this.currentyear = year.year;
     });
-    this.date = new Date();
-    console.log('from client');
-    console.log(this.date.getFullYear());
   }
 
   countrySelect(country){
@@ -67,7 +62,7 @@ export class HselectionComponent implements OnInit {
   }
 
   datecheck(){
-    if(this.date.getFullYear() >= this.toDate){
+    if(this.currentyear >= this.toDate){
       return true;
     }
     else {

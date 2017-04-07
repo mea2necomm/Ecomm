@@ -5,6 +5,36 @@ const request = require('request');
 const baseURL = 'http://www.worldholidaysandevents.com/HolidaysRESTJSON/webresources/holidaysandevents';
 const holidaysUrl = baseURL+'/holidaysAndEvents/';
 
+module.exports.findfreeholidays = function (req, res) {
+  console.log("free holidays");
+  console.log(req.params.todate);
+  if(req.params.todate <= new Date().getFullYear()){
+    console.log('show full hols');
+    request.get(
+      { url: holidaysUrl+ req.params.country+'/'+req.params.state+'/'+req.params.city+'/'+req.params.fromdate+'/1/1/'+req.params.todate+'/12/31',
+        method:'Get'
+      },
+      function (error, apires, body) {
+        if (error) {
+          res.status(500).send(error);
+          return;
+        }
+
+        if (apires.statusCode != 200 ) {
+          res.status(apires.statusCode).send(apires.statusCode);
+          return;
+        }
+
+        res.status(200).send(body);
+      }
+    );
+  } else {
+    console.log('throw error');
+    res.status(401).send({'errormessage': 'Invalid Dates'})
+  }
+
+};
+
 module.exports.findHolidays = function(req,res){
   console.log('called the correct function');
   getAuthor(req,res, function(req,res, userName){

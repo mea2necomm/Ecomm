@@ -132,7 +132,7 @@ router.get('/currentyear', (req, res) =>{
 router.get('/holidays/:country/:state/:city/:fromdate/:todate', auth,
   ctrlHoliday.findHolidays);
 
-
+router.get('/freeholidays/:country/:state/:city/:fromdate/:todate', ctrlHoliday.findfreeholidays);
 router.post('/register',ctrlAuth.register);
 router.post('/login',ctrlAuth.login);
 

@@ -30,7 +30,12 @@ export class HselectionService {
     let headers = new Headers({ 'Accept': 'application/json' });
     headers.append('Authorization', 'Bearer '+ this.authentication.getToken());
     let options = new RequestOptions({ headers: headers });
-    return this.http.get('/api/holidays/'+data.country + '/' + data.state+'/'+data.city+'/'+data.fromDate+'/'+data.toDate,options)
+    return this.http.get('/api/holidays/'+data.country + '/' + data.state+'/'+data.city+'/'+data.fromYear+'/'+data.toYear,options)
+      .map(res => res.json());
+  }
+
+  getFreeHolidays(data){
+    return this.http.get('/api/freeholidays/'+data.country + '/' + data.state+'/'+data.city+'/'+data.fromYear+'/'+data.toYear)
       .map(res => res.json());
   }
 

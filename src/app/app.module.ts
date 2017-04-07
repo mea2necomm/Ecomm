@@ -17,6 +17,7 @@ import { AuthenticationService } from './services/authentication.service';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { RegisterComponent } from './components/register/register.component';
 import { CustomValidator } from "./equal-validator.directive";
+import { ShoppingcartComponent } from './components/shoppingcart/shoppingcart.component';
 
 // Define the routes
 
@@ -28,7 +29,8 @@ import { CustomValidator } from "./equal-validator.directive";
     LoginComponent,
     NavbarComponent,
     RegisterComponent,
-    CustomValidator
+    CustomValidator,
+    ShoppingcartComponent,
   ],
   imports: [
     BrowserModule,
