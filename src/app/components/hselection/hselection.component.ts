@@ -20,6 +20,7 @@ export class HselectionComponent implements OnInit {
   cities: any = [];
   holidays: any = [];
   date: any;
+  currentyear: number;
 
   fromDate:number;
   toDate:number;
@@ -35,6 +36,14 @@ export class HselectionComponent implements OnInit {
 	  {
 	  	this.countries = countries.theList;
 	  });
+    this.hselectionService.getYear().subscribe( year =>{
+      console.log('from server');
+      console.log(year);
+      this.currentyear = year.year;
+    });
+    this.date = new Date();
+    console.log('from client');
+    console.log(this.date.getFullYear());
   }
 
   countrySelect(country){
@@ -58,7 +67,6 @@ export class HselectionComponent implements OnInit {
   }
 
   datecheck(){
-    this.date = new Date();
     if(this.date.getFullYear() >= this.toDate){
       return true;
     }

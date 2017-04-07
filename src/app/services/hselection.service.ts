@@ -33,4 +33,9 @@ export class HselectionService {
     return this.http.get('/api/holidays/'+data.country + '/' + data.state+'/'+data.city+'/'+data.fromDate+'/'+data.toDate,options)
       .map(res => res.json());
   }
+
+  getYear(){
+    return this.http.get('/api/currentyear')
+      .map(res => res.json());
+  }
 }

@@ -124,6 +124,10 @@ router.get('/countryStateCities/:state/:country', (req, res) => {
         }
       );
 });
+router.get('/currentyear', (req, res) =>{
+  var year = { 'year' : new Date().getFullYear()};
+  res.status(200).send(year);
+});
 //added auth to secure the holidays
 router.get('/holidays/:country/:state/:city/:fromdate/:todate', auth,
   ctrlHoliday.findHolidays);
