@@ -10,14 +10,17 @@ import { Router } from '@angular/router';
 export class NavbarComponent implements OnInit {
 
   currentUser:any;
+  isloggedin: boolean;
 
   constructor(
     private authenticationService: AuthenticationService,
     private router: Router
   ) {
+    this.isloggedin = authenticationService.isLoggedIn();
     let curuser:any = authenticationService.currentUser();
     if(curuser !== false){
       this.currentUser = curuser;
+      console.log(this.currentUser);
     }
     //console.log("navbar-currentuser" + this.currentUser);
   }
