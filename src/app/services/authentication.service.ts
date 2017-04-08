@@ -86,6 +86,6 @@ export class AuthenticationService {
       };
       return user;
     }
-    else return false;
+    else return null;
   }
 }
