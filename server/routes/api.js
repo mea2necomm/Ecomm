@@ -124,11 +124,15 @@ router.get('/countryStateCities/:state/:country', (req, res) => {
         }
       );
 });
+router.get('/currentyear', (req, res) =>{
+  var year = { 'year' : new Date().getFullYear()};
+  res.status(200).send(year);
+});
 //added auth to secure the holidays
 router.get('/holidays/:country/:state/:city/:fromdate/:todate', auth,
   ctrlHoliday.findHolidays);
 
-
+router.get('/freeholidays/:country/:state/:city/:fromdate/:todate', ctrlHoliday.findfreeholidays);
 router.post('/register',ctrlAuth.register);
 router.post('/login',ctrlAuth.login);
 

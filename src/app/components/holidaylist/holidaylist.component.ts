@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { HselectionService } from '../../services/hselection.service'
+import { ShoppingcartService } from '../../services/shoppingcart.service'
 
 @Component({
   selector: 'app-holidaylist',
@@ -20,9 +21,16 @@ export class HolidaylistComponent implements OnInit {
   religiousHoliday:string;
   religion:string;
   errorMessage:string;
-  constructor(private activatedRoute: ActivatedRoute, private hselectionService:HselectionService) { }
+  route: any;
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    private hselectionService:HselectionService,
+    private cartservice: ShoppingcartService,
+  ) { }
 
   ngOnInit() {
+    console.log(this.activatedRoute.snapshot.url[0].path);
+    this.route = this.activatedRoute.snapshot.url[0].path;
     this.paramsSub = this.activatedRoute.params.subscribe(params => {
 
       this.country = params['country'];
@@ -40,18 +48,34 @@ export class HolidaylistComponent implements OnInit {
         country : this.country,
         state: this.state,
         city: this.city,
-        fromDate: this.fromdate,
-        toDate: this.todate
+        fromYear: this.fromdate,
+        toYear: this.todate
       };
-      this.hselectionService.getHolidays(data)
-        .subscribe(
-          holidays =>
-          {
-            this.holidays = holidays.theList;
-            console.log(this.holidays);
-          },
-          error => this.errorMessage = <any>error
-        );
+
+      if(this.route == 'freeholidaylist'){
+        this.hselectionService.getFreeHolidays(data)
+          .subscribe(holidays =>{
+              console.log(holidays);
+              this.holidays = holidays.theList;
+            },
+            error =>{
+              this.errorMessage = error.json().errormessage;
+              console.log(this.errorMessage);
+
+            });
+      } else if (this.route == 'holidaylist'){
+        this.hselectionService.getHolidays(data)
+          .subscribe(
+            holidays =>
+            {
+              this.holidays = holidays.theList;
+              console.log(this.holidays);
+            },
+            error => this.errorMessage = <any>error
+          );
+      }
+
+
     });
 
 
