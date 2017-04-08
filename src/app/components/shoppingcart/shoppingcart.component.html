@@ -14,8 +14,10 @@
     <tbody>
       <tr class="warning" *ngFor="let item of cartitems">
         <td>{{item.country}}</td>
-        <td>{{item.state}}</td>
-        <td>{{item.city}}</td>
+        <td *ngIf="item.state != 'State'">{{item.state}}</td>
+        <td *ngIf="item.state == 'State'">No state Selected</td>
+        <td *ngIf="item.city != 'City'">{{item.city}}</td>
+        <td *ngIf="item.city == 'City'">No city selected</td>
         <td>{{item.fromYear}}&nbsp;-&nbsp;{{item.toYear}} </td>
         <td><button type="button" class="btn btn-info "  (click)="removefromcart()">Remove from cart</button></td>
       </tr>
@@ -23,4 +25,7 @@
   </table>
   <button type="button" class="btn btn-info "  >Checkout</button>
   <button type="button" class="btn btn-info " (click)="removeallfromcart()">Empty cart</button>
+</div>
+<div *ngIf="cartitems.length<=0" class="container well well-lg">
+  <p> There are no items in your shopping cart, <a href="/">Add Items</a> </p>
 </div>

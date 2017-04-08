@@ -64,8 +64,6 @@ export class HolidaylistComponent implements OnInit {
 
             });
       } else if (this.route == 'holidaylist'){
-        //Check orderlist run the following block only of excess date range is in orderlist
-
         this.hselectionService.getHolidays(data)
           .subscribe(
             holidays =>
@@ -75,10 +73,6 @@ export class HolidaylistComponent implements OnInit {
             },
             error => this.errorMessage = <any>error
           );
-
-        // Add to cart if above is false
-
-        this.cartservice.addItem(data);
       }
 
 

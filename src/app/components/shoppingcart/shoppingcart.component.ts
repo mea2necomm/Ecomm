@@ -18,6 +18,7 @@ export class ShoppingcartComponent implements OnInit {
 
   removeallfromcart(){
     this.cartservice.clearItems();
+    this.cartitems = [];
   }
 
 }

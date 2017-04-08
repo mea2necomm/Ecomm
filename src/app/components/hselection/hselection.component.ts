@@ -1,6 +1,8 @@
 import {Component, OnInit, Input} from '@angular/core';
 
 import { HselectionService } from '../../services/hselection.service'
+import { ShoppingcartService } from '../../services/shoppingcart.service'
+import { Router } from '@angular/router'
 
 @Component({
 moduleId: module.id,
@@ -25,7 +27,11 @@ export class HselectionComponent implements OnInit {
   fromDate:number;
   toDate:number;
   submitenabled: boolean = false;
-  constructor(private hselectionService:HselectionService, ){
+  constructor(
+    private hselectionService:HselectionService,
+    private cartservice: ShoppingcartService,
+    private router: Router
+  ){
   }
 
   ngOnInit() {
@@ -105,5 +111,25 @@ export class HselectionComponent implements OnInit {
     });
 
 
+  }
+
+  addtocart(){
+    //check orders, if in oreders go to holiday list, else add to cart
+    var data = {
+      country : this.selectedcountry,
+      state: this.selectedstate,
+      city: this.selectedcity,
+      fromYear: this.fromDate,
+      toYear: this.toDate
+    };
+    this.cartservice.addItem(data);
+    this.router.navigate([
+      '/holidaylist/'
+      +this.selectedcountry+'/'
+      +this.selectedstate+'/'
+      +this.selectedcity+'/'
+      +this.fromDate+'/'
+      +this.toDate
+    ]);
   }
 }
