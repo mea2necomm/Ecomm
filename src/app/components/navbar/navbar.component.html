@@ -18,8 +18,10 @@
 
 
       <ul class="nav navbar-nav navbar-right">
-        <li *ngIf="!authenticationService.isLoggedIn(); else loggedInBlock"><a href="/login">Login</a></li>
-        <ng-template #loggedInBlock>Welcome {{authenticationService.currentUser().email}} (<a href="/login" (click)="logout($event)">logout</a>)</ng-template>
+        <li><a href="/shoppingcart">Cart <span class="glyphicon glyphicon-shopping-cart badge">3</span></a></li>
+        <li *ngIf="!isloggedin"><a href="/login">Login</a></li>
+        <li *ngIf="isloggedin"><a>Welcome {{currentUser.name}}</a></li>
+        <li *ngIf="isloggedin"><a href="#" (click)="logout($event)">Logout</a></li>
       </ul>
     </div>
   </div>
