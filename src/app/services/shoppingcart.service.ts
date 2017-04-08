@@ -38,4 +38,8 @@ export class ShoppingcartService {
     localStorage.setItem('mea2necomm-shopping-cart', JSON.stringify(this.shoppingCart));
   }
 
+  getItemNum(){
+    return this.shoppingCart.length;
+  }
+
 }

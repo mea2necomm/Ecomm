@@ -22,6 +22,7 @@ export class HselectionComponent implements OnInit {
   cities: any = [];
   holidays: any = [];
   date: any;
+  cartnumber: number;
   currentyear: number;
 
   fromDate:number;
@@ -35,7 +36,10 @@ export class HselectionComponent implements OnInit {
   }
 
   ngOnInit() {
-    if(this.country){this.selectedcountry=this.country;}
+    if(this.country){
+      this.selectedcountry=this.country;
+      this.submitenabled = true;
+    }
     if(this.state){this.selectedstate=this.state;}
     if(this.city){this.selectedcity=this.city;}
     this.hselectionService.getAllCountries().subscribe(countries =>
@@ -123,7 +127,9 @@ export class HselectionComponent implements OnInit {
       toYear: this.toDate
     };
     this.cartservice.addItem(data);
-    this.router.navigate([
+    this.cartnumber = this.cartservice.getShoppingCart().length;
+    console.log(this.cartnumber);
+    /*this.router.navigate([
       '/holidaylist/'
       +this.selectedcountry+'/'
       +this.selectedstate+'/'
@@ -131,5 +137,6 @@ export class HselectionComponent implements OnInit {
       +this.fromDate+'/'
       +this.toDate
     ]);
+    */
   }
 }

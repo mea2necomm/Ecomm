@@ -18,7 +18,8 @@
 
 
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="/shoppingcart">Cart <span class="glyphicon glyphicon-shopping-cart badge">3</span></a></li>
+        <li *ngIf="cartnumber === undefined"><a href="/shoppingcart">Cart <span class="glyphicon glyphicon-shopping-cart badge">{{this.numitems}}</span></a></li>
+        <li *ngIf="cartnumber !== undefined"><a href="/shoppingcart">Cart <span class="glyphicon glyphicon-shopping-cart badge">{{cartnumber}}</span></a></li>
         <li *ngIf="!isloggedin"><a href="/login">Login</a></li>
         <li *ngIf="isloggedin"><a>Welcome {{currentUser.name}}</a></li>
         <li *ngIf="isloggedin"><a href="#" (click)="logout($event)">Logout</a></li>

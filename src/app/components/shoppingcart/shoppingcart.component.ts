@@ -8,6 +8,7 @@ import { ShoppingcartService } from '../../services/shoppingcart.service';
 export class ShoppingcartComponent implements OnInit {
 
   cartitems: any [];
+  cartnumber: number;
 
   constructor(private cartservice : ShoppingcartService) { }
 
@@ -22,6 +23,7 @@ export class ShoppingcartComponent implements OnInit {
     // if user is not logged in
     this.cartservice.clearItems();
     this.cartitems = [];
+    this.cartnumber = 0;
     //if user is logged in call a different method
   }
 
