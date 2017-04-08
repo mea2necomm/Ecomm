@@ -41,8 +41,7 @@ export class ShoppingcartService {
   }
 
   private updateStorage(){
-    //if(this.authenticationService.isLoggedIn()){
-    if(false){
+    if(this.authenticationService.isLoggedIn()){
       var user = this.authenticationService.currentUser();
       // add to server
       return this.http.post('/api/shoppingcart', { useremail: user.email, cartItems: JSON.stringify(this.shoppingCart) })
