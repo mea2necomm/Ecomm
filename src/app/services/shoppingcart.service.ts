@@ -69,4 +69,8 @@ export class ShoppingcartService {
 
   }
 
+  getItemNum(){
+    return this.shoppingCart.length;
+  }
+
 }
