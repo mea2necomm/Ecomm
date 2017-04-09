@@ -127,8 +127,15 @@ export class HselectionComponent implements OnInit {
       toYear: this.toDate
     };
     this.cartservice.addItem(data);
-    this.cartnumber = this.cartservice.getShoppingCart().length;
-    console.log(this.cartnumber);
+
+    this.cartservice.getShoppingCart().subscribe(cartItems =>
+    {
+      this.cartnumber = cartItems.length;
+      console.log("cartnumber" + this.cartnumber);
+    });
+
+    //this.cartnumber = this.cartservice.getShoppingCart().length;
+
     /*this.router.navigate([
       '/holidaylist/'
       +this.selectedcountry+'/'

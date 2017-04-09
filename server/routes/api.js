@@ -12,6 +12,7 @@ var auth = jwt({
 //controller routes to authentication pages
 var ctrlAuth = require('../controllers/authentication');
 var ctrlHoliday = require('../controllers/holiday');
+var ctrlShoppingCart = require('../controllers/shoppingCart');
 const request = require('request');
 
 // declare axios for making http requests
@@ -133,6 +134,10 @@ router.get('/holidays/:country/:state/:city/:fromdate/:todate', auth,
   ctrlHoliday.findHolidays);
 
 router.get('/freeholidays/:country/:state/:city/:fromdate/:todate', ctrlHoliday.findfreeholidays);
+
+router.post('/shoppingcart',ctrlShoppingCart.saveCart);
+router.get('/shoppingcart/:useremail',ctrlShoppingCart.getShoppingCart);
+
 router.post('/register',ctrlAuth.register);
 router.post('/login',ctrlAuth.login);
 
