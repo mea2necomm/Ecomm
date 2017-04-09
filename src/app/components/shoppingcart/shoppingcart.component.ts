@@ -9,7 +9,8 @@ import { Router } from '@angular/router';
 })
 export class ShoppingcartComponent implements OnInit {
 
-  cartitems: SearchQuery [];
+
+  cartitems: any = [];
   cartnumber: number;
   price: number;
   total: number;
@@ -22,20 +23,23 @@ export class ShoppingcartComponent implements OnInit {
   ngOnInit() {
     this.price = this.cartservice.getPricePerYear();
 
-    console.log(this.cartservice.getShoppingCart());
-    // if user is not logged in
-    this.cartitems = this.cartservice.getShoppingCart();
-    //if user is logged in fetch from a different method
+    this.cartservice.getShoppingCart().subscribe(usercartitems => {
+      if(usercartitems){
+        console.log("shopping cart component");
+        console.log(usercartitems);
+      }
+
+      this.cartitems = usercartitems;
+      //console.log("shoppingcart component: " + this.cartitems[0].country);
+    });
     this.total = this.totalprice();
     console.log(this.total);
   }
 
   removeallfromcart(){
-    // if user is not logged in
     this.cartservice.clearItems();
     this.cartitems = [];
     this.cartnumber = 0;
-    //if user is logged in call a different method
   }
 
   totalprice(){

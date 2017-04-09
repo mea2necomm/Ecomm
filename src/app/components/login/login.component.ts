@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthenticationService } from '../../services/authentication.service';
+import { ShoppingcartService } from '../../services/shoppingcart.service';
+
 @Component({
   selector: 'app-login',
   templateUrl: 'login.component.html',
@@ -14,7 +16,8 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private authenticationService: AuthenticationService) { }
+    private authenticationService: AuthenticationService,
+    private cartservice : ShoppingcartService) { }
 
   ngOnInit() {
   }
@@ -26,7 +29,9 @@ export class LoginComponent implements OnInit {
         result => {
           console.log(result);
         if (result === true) {
+          this.cartservice.updateLocalStorageToServer();
           this.router.navigate(['/']);
+
         } else {
           this.error = 'Username or password is incorrect';
           this.loading = false;
