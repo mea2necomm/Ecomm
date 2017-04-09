@@ -6,6 +6,6 @@ export interface SearchQuery{
   country:string,
   state:string,
   city:string,
-  fromYear:Number,
-  toYear:Number
+  fromYear:number,
+  toYear:number
 }

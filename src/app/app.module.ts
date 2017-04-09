@@ -18,6 +18,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { RegisterComponent } from './components/register/register.component';
 import { CustomValidator } from "./equal-validator.directive";
 import { ShoppingcartComponent } from './components/shoppingcart/shoppingcart.component';
+import { CheckoutComponent } from './components/checkout/checkout.component';
 
 // Define the routes
 
@@ -31,6 +32,7 @@ import { ShoppingcartComponent } from './components/shoppingcart/shoppingcart.co
     RegisterComponent,
     CustomValidator,
     ShoppingcartComponent,
+    CheckoutComponent,
   ],
   imports: [
     BrowserModule,

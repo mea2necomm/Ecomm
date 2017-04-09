@@ -42,4 +42,8 @@ export class ShoppingcartService {
     return this.shoppingCart.length;
   }
 
+  getPricePerYear(){
+    return 5;
+  }
+
 }

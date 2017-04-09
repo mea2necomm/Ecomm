@@ -10,7 +10,9 @@
         <th>State</th>
         <th>City</th>
         <th>Range</th>
-        <th>Delete</th>
+        <th>Price</th>
+        <th class="text-right">Delete</th>
+
       </tr>
       </thead>
       <tbody>
@@ -21,11 +23,20 @@
         <td *ngIf="item.city != 'City'">{{item.city}}</td>
         <td *ngIf="item.city == 'City'">No city selected</td>
         <td>{{item.fromYear}}&nbsp;-&nbsp;{{item.toYear}} </td>
-        <td><button type="button" class="btn btn-info "  (click)="removefromcart()">Remove from cart</button></td>
+        <td>{{price*(item.toYear-item.fromYear+1) | currency:'USD':true:'.2-4'}}</td>
+        <td class="text-center"><button type="button" class="close text-center" (click)="removefromcart()" aria-hidden="true">&times;</button></td>
+      </tr>
+      <tr class="info">
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>Total:</td>
+        <td>{{total | currency:'USD':true:'.2-4'}}</td>
+        <td></td>
       </tr>
       </tbody>
     </table>
-    <button type="button" class="btn btn-info "  >Checkout</button>
+    <button type="button" class="btn btn-info "  (click)="checkout()">Checkout</button>
     <button type="button" class="btn btn-info " (click)="removeallfromcart()">Empty cart</button>
   </div>
   <div *ngIf="cartitems.length<=0" class="container well well-lg">
