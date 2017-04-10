@@ -22,10 +22,14 @@ export class CheckoutComponent implements OnInit {
 
   ngOnInit() {
     this.price = this.cartservice.getPricePerYear();
-    this.cartservice.getShoppingCart().subscribe( cartitems => this.cartitems = cartitems);
+    this.cartservice.getShoppingCart().subscribe( cartitems =>{
+      this.cartitems = cartitems;
+      this.total = this.totalprice();
+      console.log(this.total);
+    });
     //if user is logged in fetch from a different method
-    this.total = this.totalprice();
-    console.log(this.total);
+
+
   }
 
   totalprice(){
