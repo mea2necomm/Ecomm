@@ -3,8 +3,9 @@ import { Http,RequestOptions,Headers } from '@angular/http';
 import 'rxjs/add/operator/catch'
 import 'rxjs/add/operator/map'
 import {Observable} from "rxjs";
-import {ShoppingcartService} from "./shoppingcart.service";
 import {SearchQuery} from "../models/SearchQuery";
+import {OrderService} from "./order.service";
+import {Router} from '@angular/router';
 
 @Injectable()
 export class PaymentService {
@@ -12,7 +13,8 @@ export class PaymentService {
   cart: SearchQuery[];
   constructor(
     private http: Http,
-    private cartservice : ShoppingcartService
+    private orderservice : OrderService,
+    private router : Router
   ) { }
 
   createpayment(data){
@@ -46,7 +48,7 @@ export class PaymentService {
           console.log(result);
           this.paymentid = result.id;
           if(result.state == "approved"){
-            this.cartservice.pushtoorders(this.paymentid);
+            this.orderservice.pushtoorders(this.paymentid);
           }
           if(result.state == "failed"){
 
@@ -54,6 +56,7 @@ export class PaymentService {
 
         }, error=>{
           console.log(error);
+          this.router.navigate(['/failure'])
         });
   }
 

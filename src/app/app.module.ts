@@ -20,6 +20,7 @@ import { CustomValidator } from "./equal-validator.directive";
 import { ShoppingcartComponent } from './components/shoppingcart/shoppingcart.component';
 import { CheckoutComponent } from './components/checkout/checkout.component';
 import {PaymentService} from "./services/payment.service";
+import {OrderService} from "./services/order.service";
 
 // Define the routes
 
@@ -41,7 +42,14 @@ import {PaymentService} from "./services/payment.service";
     HttpModule,
     RouterModule.forRoot(routes) // Add routes to the app
   ],
-  providers: [HselectionService, AuthenticationService, ShoppingcartService, AuthGuard, PaymentService],
+  providers: [
+    HselectionService,
+    AuthenticationService,
+    ShoppingcartService,
+    AuthGuard,
+    PaymentService,
+    OrderService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
