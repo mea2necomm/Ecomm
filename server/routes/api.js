@@ -145,6 +145,6 @@ router.post('/login',ctrlAuth.login);
 
 router.post('/create',paypal.create);
 
-router.post('/orders', orders.pushtoorders);
+router.post('/orders', orders.saveOrder);
 
 module.exports = router;
