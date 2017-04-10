@@ -30,7 +30,6 @@ exports.create = function (req, res) {
   console.log(req.body.method);
   var method = req.body.method;
   if(method == 'credit'){
-    console.log("in if");
     var funding_instruments = [
       {
         "credit_card": {
@@ -49,9 +48,12 @@ exports.create = function (req, res) {
   }
   paypal.payment.create(payment,function (error, payment) {
     if(error){
+      console.log('in error');
       console.log(error);
+      sendJSONresponse(res, 400, {
+        "error": "Invalid data"
+      });
     }else {
-      console.log('response: ');
       console.log(payment);
       res.send(payment);
     }
@@ -69,4 +71,6 @@ exports.get = function (req, res) {
   });
 
 };
+
+
 

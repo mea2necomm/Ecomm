@@ -14,6 +14,7 @@ var ctrlAuth = require('../controllers/authentication');
 var ctrlHoliday = require('../controllers/holiday');
 var ctrlShoppingCart = require('../controllers/shoppingCart');
 var paypal = require('../controllers/payment');
+var orders = require('../controllers/orders');
 const request = require('request');
 
 // declare axios for making http requests
@@ -143,5 +144,7 @@ router.post('/register',ctrlAuth.register);
 router.post('/login',ctrlAuth.login);
 
 router.post('/create',paypal.create);
+
+router.post('/orders', orders.pushtoorders);
 
 module.exports = router;

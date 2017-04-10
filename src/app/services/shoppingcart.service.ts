@@ -44,6 +44,43 @@ export class ShoppingcartService {
     }
   }
 
+  pushtoorders(paymentid) {
+    console.log('push to orders');
+    console.log(this.shoppingCart);
+    console.log(paymentid);
+    if (this.authenticationService.isLoggedIn()) {
+      var user = this.authenticationService.currentUser();
+      var headers = new Headers({
+        'Content-Type': 'application/json'
+      });
+      let options = new RequestOptions({headers: headers});
+      this.http.post('/api/orders', JSON.stringify({
+        useremail: user.email,
+        cartItems: this.shoppingCart,
+        paymentid: paymentid
+      }), options)
+        .map((response) => {
+          if (response.status === 200) {
+            console.log("saved cart successfully to db");
+            // return true to indicate successful saved
+            return true;
+          } else {
+            console.log("error while saving cart to db. Status: " + response.status);
+            // return false to indicate it did not save properly
+            return false;
+          }
+        })
+        .catch((error, caught) => {
+          if (error.status === 401) {
+            console.log(error);
+
+          }
+          return Observable.throw(error);
+        })
+        .subscribe();
+    }
+  }
+
   addItem(cartItem:SearchQuery){
     this.shoppingCart.push(cartItem);
     console.log("adding item to cart: " + this.shoppingCart);

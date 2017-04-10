@@ -30,9 +30,10 @@ export class ShoppingcartComponent implements OnInit {
       }
 
       this.cartitems = usercartitems;
+      this.total = this.totalprice();
       //console.log("shoppingcart component: " + this.cartitems[0].country);
     });
-    this.total = this.totalprice();
+
     console.log(this.total);
   }
 

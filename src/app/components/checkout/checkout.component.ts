@@ -96,7 +96,8 @@ export class CheckoutComponent implements OnInit {
         "first_name": this.firstname,
         "last_name": this.lastname
       };
-      this.paymentservice.createpayment(payment).subscribe(result => {console.log(result)});
+      this.paymentservice.createpayment(payment);
+
     }
 
     if(this.paypalactive){
