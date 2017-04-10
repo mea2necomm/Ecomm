@@ -42,6 +42,19 @@ export class ShoppingcartComponent implements OnInit {
     this.cartnumber = 0;
   }
 
+  removefromcart(index:number){
+    console.log("delete index: " + index);
+    this.cartservice.removeItem(index);
+    this.cartitems.splice(index,1);
+
+    this.cartservice.getShoppingCart().subscribe(cartItems =>
+    {
+      this.cartnumber = cartItems.length;
+      console.log("cartnumber from delete:" + this.cartnumber);
+    });
+
+  }
+
   totalprice(){
     var total = 0;
     for(var i = 0; i < this.cartitems.length; i++){
