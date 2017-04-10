@@ -2,7 +2,7 @@
  * Created by jacob on 4/6/17.
  */
 var mongoose = require( 'mongoose' );
-require('./cartItems');
+
 /*
  export interface SearchQuery{
  country:string,
@@ -13,6 +13,13 @@ require('./cartItems');
  }
  * */
 
+var cartItemSchema = new mongoose.Schema({
+  country: String,
+  state: String,
+  city: String,
+  fromYear: Number,
+  toYear: Number
+});
 
 
 var orderSchema = new mongoose.Schema({
