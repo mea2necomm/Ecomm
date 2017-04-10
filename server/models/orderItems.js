@@ -2,6 +2,10 @@
  * Created by jacob on 4/6/17.
  */
 var mongoose = require( 'mongoose' );
+<<<<<<< HEAD
+=======
+
+>>>>>>> 6835a2bc09ab2a6e2d752af0db9148fdfba8df45
 /*
  export interface SearchQuery{
  country:string,
@@ -11,6 +15,10 @@ var mongoose = require( 'mongoose' );
  toYear:Number
  }
  * */
+<<<<<<< HEAD
+=======
+
+>>>>>>> 6835a2bc09ab2a6e2d752af0db9148fdfba8df45
 var cartItemSchema = new mongoose.Schema({
   country: String,
   state: String,
