@@ -6,10 +6,15 @@
   </ul>
   <div *ngIf="creditactive" class="col-md-6 col-md-offset-3">
     <form (ngSubmit)="f.form.valid && pay()" #f="ngForm" novalidate>
-      <div class="form-group col-xs-12" [ngClass]="{ 'has-error': f.submitted && !name.valid }">
-        <label for="name">Name</label>
-        <input type="text" class="form-control" name="name" [(ngModel)]="fullname" #name="ngModel" required />
-        <div *ngIf="f.submitted && !name.valid" class="help-block">Full Name is required</div>
+      <div class="form-group col-xs-12" [ngClass]="{ 'has-error': f.submitted && !fname.valid }">
+        <label for="fname">First Name</label>
+        <input type="text" class="form-control" name="fname" [(ngModel)]="firstname" #fname="ngModel" required />
+        <div *ngIf="f.submitted && !fname.valid" class="help-block">First Name is required</div>
+      </div>
+      <div class="form-group col-xs-12" [ngClass]="{ 'has-error': f.submitted && !lname.valid }">
+        <label for="lname">Last Name</label>
+        <input type="text" class="form-control" name="lname" [(ngModel)]="lastname" #lname="ngModel" required />
+        <div *ngIf="f.submitted && !lname.valid" class="help-block">Last Name is required</div>
       </div>
       <div class="form-group col-xs-12" [ngClass]="{ 'has-error': f.submitted && !cardnum.valid }">
         <label for="cardnum">Card No.</label>
@@ -20,7 +25,7 @@
       <div class="form-group col-xs-8" [ngClass]="{ 'has-error': f.submitted && !expiry.valid }">
         <label for="expiry">Expiry</label>
         <input type="text" class="form-control" name="expiry" [(ngModel)]="expirydate" #expiry="ngModel" required
-               pattern="^(0[1-9]|1[0-2])\/?([0-9]{4}|[0-9]{2})$"/>
+               pattern="^(0[1-9]|1[0-2])\/([0-9]{4})$"/>
         <div *ngIf="f.submitted && !expiry.valid" class="help-block">Invalid Card Number</div>
       </div>
       <div class="form-group col-xs-4" [ngClass]="{ 'has-error': f.submitted && !code.valid }">

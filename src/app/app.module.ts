@@ -19,6 +19,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { CustomValidator } from "./equal-validator.directive";
 import { ShoppingcartComponent } from './components/shoppingcart/shoppingcart.component';
 import { CheckoutComponent } from './components/checkout/checkout.component';
+import {PaymentService} from "./services/payment.service";
 
 // Define the routes
 
@@ -40,7 +41,7 @@ import { CheckoutComponent } from './components/checkout/checkout.component';
     HttpModule,
     RouterModule.forRoot(routes) // Add routes to the app
   ],
-  providers: [HselectionService, AuthenticationService, ShoppingcartService, AuthGuard],
+  providers: [HselectionService, AuthenticationService, ShoppingcartService, AuthGuard, PaymentService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

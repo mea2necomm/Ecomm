@@ -3,7 +3,7 @@ const express = require('express');
 const path = require('path');
 const http = require('http');
 const bodyParser = require('body-parser');
-
+var fs = require('fs');
 //require passport used for authentication service
 var passport = require('passport')
 // require the database so initial connection is established
@@ -13,6 +13,17 @@ require('./server/config/passport');
 
 // Get our API routes
 const api = require('./server/routes/api');
+var paypal = require('./server/controllers/payment');
+
+
+try {
+  var configJSON = fs.readFileSync(__dirname + "/config.json");
+  var config = JSON.parse(configJSON.toString());
+} catch (e) {
+  console.error("File config.json not found or is invalid: " + e.message);
+  process.exit(1);
+}
+paypal.init(config);
 
 const app = express();
 

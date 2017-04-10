@@ -13,6 +13,7 @@ var auth = jwt({
 var ctrlAuth = require('../controllers/authentication');
 var ctrlHoliday = require('../controllers/holiday');
 var ctrlShoppingCart = require('../controllers/shoppingCart');
+var paypal = require('../controllers/payment');
 const request = require('request');
 
 // declare axios for making http requests
@@ -140,5 +141,7 @@ router.get('/shoppingcart/:useremail',ctrlShoppingCart.getShoppingCart);
 
 router.post('/register',ctrlAuth.register);
 router.post('/login',ctrlAuth.login);
+
+router.post('/create',paypal.create);
 
 module.exports = router;
