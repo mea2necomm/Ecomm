@@ -7,6 +7,8 @@ import { RegisterComponent } from "./components/register/register.component";
 import { ShoppingcartComponent } from './components/shoppingcart/shoppingcart.component';
 import { CheckoutComponent } from './components/checkout/checkout.component';
 import { AuthGuard } from './_gaurds/auth.gaurd';
+import { SuccessComponent } from './components/common/success.component';
+import { FailureComponent } from './components/common/failure.component';
 
 export const routes: Routes = [
   {
@@ -46,5 +48,14 @@ export const routes: Routes = [
   {
     path: 'checkout',
     component: CheckoutComponent
+  }
+  ,
+  {
+    path: 'success',
+    component: SuccessComponent
+  },
+  {
+    path: 'failure',
+    component: FailureComponent
   }
   ];

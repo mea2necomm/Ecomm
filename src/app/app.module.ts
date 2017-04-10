@@ -21,6 +21,8 @@ import { ShoppingcartComponent } from './components/shoppingcart/shoppingcart.co
 import { CheckoutComponent } from './components/checkout/checkout.component';
 import {PaymentService} from "./services/payment.service";
 import {OrderService} from "./services/order.service";
+import { SuccessComponent } from './components/common/success.component';
+import { FailureComponent } from './components/common/failure.component';
 
 // Define the routes
 
@@ -35,6 +37,8 @@ import {OrderService} from "./services/order.service";
     CustomValidator,
     ShoppingcartComponent,
     CheckoutComponent,
+    SuccessComponent,
+    FailureComponent
   ],
   imports: [
     BrowserModule,
