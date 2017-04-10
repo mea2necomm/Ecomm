@@ -49,6 +49,14 @@ export class ShoppingcartService {
     console.log("adding item to cart: " + this.shoppingCart);
     this.updateStorage();
 }
+
+  removeItem(index:number){
+    if(index < this.shoppingCart.length && index >= 0){
+      this.shoppingCart.splice(index,1);
+      this.updateStorage();
+    }
+  }
+
   addItems(cartItems:SearchQuery[]){
     this.shoppingCart = this.shoppingCart.concat(cartItems);
     this.updateStorage();
