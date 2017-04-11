@@ -57,4 +57,14 @@ export class OrderService {
     });
 
   }
+
+  getuserorders(){
+    if(this.authservice.isLoggedIn()) {
+      var user = this.authservice.currentUser();
+
+      return this.http.get('/api/orders/' + user.email)
+        .map(res => res.json());
+    }
+  }
+
 }
