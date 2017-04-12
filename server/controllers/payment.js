@@ -61,8 +61,8 @@ exports.create = function (req, res) {
 };
 
 exports.get = function (req, res) {
-  var paymentid = 'PAY-7DB078714V269580XLDSBLYQ';
-  paypal.payment.get(paymentid, function (error, payment) {
+  console.log('paypal get');
+  paypal.payment.get(req.params.paymentid, function (error, payment) {
     if (error){
       console.log(error);
     }else {

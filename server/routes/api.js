@@ -149,4 +149,6 @@ router.post('/orders', orders.saveOrder);
 
 router.get('/orders/:useremail', orders.getOrders);
 
+router.get('/payment/:paymentid', paypal.get);
+
 module.exports = router;
