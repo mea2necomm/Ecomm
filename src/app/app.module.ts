@@ -24,6 +24,7 @@ import {OrderService} from "./services/order.service";
 import { SuccessComponent } from './components/common/success.component';
 import { FailureComponent } from './components/common/failure.component';
 import { OrderComponent } from './components/order/order.component';
+import {LogoutComponent} from "./components/common/logout.component";
 
 // Define the routes
 
@@ -40,7 +41,8 @@ import { OrderComponent } from './components/order/order.component';
     CheckoutComponent,
     SuccessComponent,
     FailureComponent,
-    OrderComponent
+    OrderComponent,
+    LogoutComponent
   ],
   imports: [
     BrowserModule,
