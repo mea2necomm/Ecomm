@@ -23,6 +23,7 @@ import {PaymentService} from "./services/payment.service";
 import {OrderService} from "./services/order.service";
 import { SuccessComponent } from './components/common/success.component';
 import { FailureComponent } from './components/common/failure.component';
+import { OrderComponent } from './components/order/order.component';
 
 // Define the routes
 
@@ -38,7 +39,8 @@ import { FailureComponent } from './components/common/failure.component';
     ShoppingcartComponent,
     CheckoutComponent,
     SuccessComponent,
-    FailureComponent
+    FailureComponent,
+    OrderComponent
   ],
   imports: [
     BrowserModule,

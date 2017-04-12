@@ -9,6 +9,7 @@ import { CheckoutComponent } from './components/checkout/checkout.component';
 import { AuthGuard } from './_gaurds/auth.gaurd';
 import { SuccessComponent } from './components/common/success.component';
 import { FailureComponent } from './components/common/failure.component';
+import { OrderComponent} from './components/order/order.component';
 
 export const routes: Routes = [
   {
@@ -57,5 +58,9 @@ export const routes: Routes = [
   {
     path: 'failure',
     component: FailureComponent
+  },
+  {
+    path: 'orders',
+    component: OrderComponent
   }
   ];

@@ -1,0 +1,32 @@
+<app-navbar [cartnumber] = "cartnumber"> </app-navbar>
+<div class="container" >
+  <h3 class="text-center">
+    Orders
+  </h3>
+
+  <div *ngIf="orders.length>0" class="container well well-lg">
+    <table class="table table-striped table-hover ">
+      <thead>
+      <tr>
+        <th>Paymentid</th>
+        <th>Purchase Date</th>
+        <th>Order Details </th>
+        <th>Payment Details</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr class="warning" *ngFor="let order of orders">
+        <td>{{order.paymentid}}</td>
+        <td>stub date</td>
+        <td><a href="#">order details </a></td>
+        <td><a href="#">stub price</a></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="this.orders.length<=0" class="container well well-lg">
+    <p> You do not have any orders. <a href="/">Buy</a> </p>
+  </div>
+
+</div>
