@@ -48,7 +48,7 @@ export class PaymentService {
           console.log(result);
           this.paymentid = result.id;
           if(result.state == "approved"){
-            this.orderservice.pushtoorders(this.paymentid);
+            this.orderservice.pushtoorders(this.paymentid, data.total);
           }
           if(result.state == "failed"){
 

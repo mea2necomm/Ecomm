@@ -13,7 +13,7 @@ export class OrderService {
     private http: Http,
     private router: Router
   ) { }
-  pushtoorders(paymentid){
+  pushtoorders(paymentid, total){
     this.cartservice.getShoppingCart().subscribe(cartitems => {
       var user = this.authservice.currentUser();
       var headers = new Headers({
@@ -23,7 +23,8 @@ export class OrderService {
       this.http.post('/api/orders', JSON.stringify({
         useremail: user.email,
         cartItems: cartitems,
-        paymentid: paymentid
+        paymentid: paymentid,
+        total: total
       }), options)
         .map((response) => {
           if (response.status === 200) {
@@ -45,6 +46,7 @@ export class OrderService {
         })
         .subscribe(res => {
           if(res == true){
+            this.cartservice.clearItems();
             this.router.navigate(['/success'])
           }
           else {

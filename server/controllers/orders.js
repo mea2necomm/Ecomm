@@ -10,7 +10,7 @@ var sendJSONresponse = function(res, status, content) {
 
 module.exports.saveOrder = function(req, res) {
   console.log("saving order to db...");
-  if(!req.body || !req.body.useremail || !req.body.paymentid || !req.body.cartItems) {
+  if(!req.body || !req.body.useremail || !req.body.paymentid || !req.body.cartItems || !req.body.total) {
     console.log("Error while saving order to db: all fields required");
     sendJSONresponse(res, 400, {
       "message": "All fields required"
@@ -20,10 +20,26 @@ module.exports.saveOrder = function(req, res) {
 
 
   var order = new Order();
+  var today = new Date();
+  var dd = today.getDate();
+  var mm = today.getMonth()+1; //January is 0!
+  var yyyy = today.getFullYear();
+
+  if(dd<10) {
+    dd='0'+dd
+  }
+
+  if(mm<10) {
+    mm='0'+mm
+  }
+
+  today = mm+'/'+dd+'/'+yyyy;
 
   order.paymentid = req.body.paymentid;
   order.useremail = req.body.useremail;
   order.cartItems = req.body.cartItems;
+  order.total = req.body.total;
+  order.date = today;
 
   order.save(function(err) {
     if (err) {

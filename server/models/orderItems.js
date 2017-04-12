@@ -20,7 +20,14 @@ var orderSchema = new mongoose.Schema({
     unique: true,
     required: true
   },
-  cartItems:[cartItemSchema]
+  cartItems:[cartItemSchema],
+  total: {
+    type: Number,
+    required: true
+  },
+  date: {
+    type: String
+  }
 });
 
 
