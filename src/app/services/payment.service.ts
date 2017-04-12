@@ -60,5 +60,10 @@ export class PaymentService {
         });
   }
 
+  getPaymentDetails(paymentid){
+    console.log(paymentid);
+    return this.http.get('/api/payment/'+paymentid).map(res => res.json());
+  }
+
 
 }
