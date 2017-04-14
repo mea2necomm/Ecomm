@@ -145,9 +145,9 @@ router.post('/login',ctrlAuth.login);
 
 router.post('/create',paypal.create);
 
-router.post('/orders', orders.saveOrder);
+router.post('/orders', auth, orders.saveOrder);
 
-router.get('/orders/:useremail', orders.getOrders);
+router.get('/orders/:useremail', auth, orders.getOrders);
 
 router.get('/payment/:paymentid', paypal.get);
 

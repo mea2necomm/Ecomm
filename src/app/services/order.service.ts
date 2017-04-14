@@ -15,10 +15,14 @@ export class OrderService {
   ) { }
   pushtoorders(paymentid, total){
     this.cartservice.getShoppingCart().subscribe(cartitems => {
+
       var user = this.authservice.currentUser();
       var headers = new Headers({
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
       });
+      headers.append('Authorization', 'Bearer '+ this.authservice.getToken());
+
       let options = new RequestOptions({headers: headers});
       this.http.post('/api/orders', JSON.stringify({
         useremail: user.email,
@@ -62,9 +66,14 @@ export class OrderService {
 
   getuserorders(){
     if(this.authservice.isLoggedIn()) {
+
+      let headers = new Headers({ 'Accept': 'application/json' });
+      headers.append('Authorization', 'Bearer '+ this.authservice.getToken());
+      let options = new RequestOptions({ headers: headers });
+
       var user = this.authservice.currentUser();
 
-      return this.http.get('/api/orders/' + user.email)
+      return this.http.get('/api/orders/' + user.email,options)
         .map(res => res.json());
     }
   }
