@@ -38,7 +38,8 @@ exports.create = function (req, res) {
           "expire_month": req.body.expmon,
           "expire_year": req.body.expyear,
           "first_name": req.body.fname,
-          "last_name": req.body.lname
+          "last_name": req.body.lname,
+          "cvv2": req.body.cvv2
         }
       }
     ];

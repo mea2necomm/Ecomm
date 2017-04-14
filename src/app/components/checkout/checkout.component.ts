@@ -94,7 +94,8 @@ export class CheckoutComponent implements OnInit {
         "expire_month": this.expirydate.split("/")[0],
         "expire_year": this.expirydate.split("/")[1],
         "first_name": this.firstname,
-        "last_name": this.lastname
+        "last_name": this.lastname,
+        "cvv2" : this.cvcode
       };
       this.paymentservice.createpayment(payment);
 
