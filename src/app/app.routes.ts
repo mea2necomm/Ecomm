@@ -10,6 +10,7 @@ import { AuthGuard } from './_gaurds/auth.gaurd';
 import { SuccessComponent } from './components/common/success.component';
 import { FailureComponent } from './components/common/failure.component';
 import { OrderComponent} from './components/order/order.component';
+import {LogoutComponent} from "./components/common/logout.component";
 
 export const routes: Routes = [
   {
@@ -62,5 +63,9 @@ export const routes: Routes = [
   {
     path: 'orders',
     component: OrderComponent
+  },
+  {
+    path: 'logout',
+    component: LogoutComponent
   }
   ];

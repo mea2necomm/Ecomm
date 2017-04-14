@@ -31,7 +31,8 @@ export class PaymentService {
       method: data.method,
       cnum: data.number,
       total : data.total,
-      type: data.type
+      type: data.type,
+      cvv2: data.cvv2
     }), options)
       .map(res =>
         res.json()
