@@ -137,8 +137,8 @@ router.get('/holidays/:country/:state/:city/:fromdate/:todate', auth,
 
 router.get('/freeholidays/:country/:state/:city/:fromdate/:todate', ctrlHoliday.findfreeholidays);
 
-router.post('/shoppingcart',ctrlShoppingCart.saveCart);
-router.get('/shoppingcart/:useremail',ctrlShoppingCart.getShoppingCart);
+router.post('/shoppingcart',auth, ctrlShoppingCart.saveCart);
+router.get('/shoppingcart/:useremail', auth, ctrlShoppingCart.getShoppingCart);
 
 router.post('/register',ctrlAuth.register);
 router.post('/login',ctrlAuth.login);

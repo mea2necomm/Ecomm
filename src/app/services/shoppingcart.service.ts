@@ -22,8 +22,12 @@ export class ShoppingcartService {
     console.log("getting saved cart");
     if(this.authenticationService.isLoggedIn()){
 
+      let headers = new Headers({ 'Accept': 'application/json' });
+      headers.append('Authorization', 'Bearer '+ this.authenticationService.getToken());
+      let options = new RequestOptions({ headers: headers });
+
       // first setting shopping cart variable locally
-      this.http.get('/api/shoppingcart/'+ this.authenticationService.currentUser().email )
+      this.http.get('/api/shoppingcart/'+ this.authenticationService.currentUser().email ,options)
         .map(res => res.json()).subscribe(usercartitems=> {
         if(usercartitems)
           console.log(usercartitems);
@@ -31,7 +35,7 @@ export class ShoppingcartService {
       });
 
       // returning observable to calling component
-      return this.http.get('/api/shoppingcart/'+ this.authenticationService.currentUser().email )
+      return this.http.get('/api/shoppingcart/'+ this.authenticationService.currentUser().email ,options )
         .map(res => res.json());
     }else{
       let savedShoppingCart = JSON.parse(localStorage.getItem('mea2necomm-shopping-cart'));
@@ -74,10 +78,15 @@ export class ShoppingcartService {
       let savedShoppingCart = JSON.parse(localStorage.getItem('mea2necomm-shopping-cart'));
       if(savedShoppingCart) {
 
-        this.http.get('/api/shoppingcart/'+ this.authenticationService.currentUser().email )
+        let headers = new Headers({ 'Accept': 'application/json' });
+        headers.append('Authorization', 'Bearer '+ this.authenticationService.getToken());
+        let options = new RequestOptions({ headers: headers });
+
+        this.http.get('/api/shoppingcart/'+ this.authenticationService.currentUser().email,options )
           .map(res => res.json()).subscribe(usercartitems=> {
           this.shoppingCart = usercartitems;
           this.addItems(savedShoppingCart);
+          //resetting local storage
           localStorage.setItem('mea2necomm-shopping-cart', JSON.stringify([]));
         });
       }
@@ -90,8 +99,12 @@ export class ShoppingcartService {
     console.log("getting saved cart");
     if(this.authenticationService.isLoggedIn()){
 
+      let headers = new Headers({ 'Accept': 'application/json' });
+      headers.append('Authorization', 'Bearer '+ this.authenticationService.getToken());
+      let options = new RequestOptions({ headers: headers });
+
       // first setting shopping cart variable locally
-      this.http.get('/api/shoppingcart/'+ this.authenticationService.currentUser().email )
+      this.http.get('/api/shoppingcart/'+ this.authenticationService.currentUser().email , options )
         .map(res => res.json()).subscribe(usercartitems=> {
         if(usercartitems)
           console.log(usercartitems);
@@ -112,11 +125,20 @@ export class ShoppingcartService {
       console.log("setting logged in users cart");
       var user = this.authenticationService.currentUser();
       // add to server
-      console.log(user);
-      console.log(JSON.stringify({ useremail: user.email, cartItems: this.shoppingCart }));
+      //console.log(user);
+      //console.log(JSON.stringify({ useremail: user.email, cartItems: this.shoppingCart }));
+
+
+
+
+
       var headers = new Headers({
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+        'Accept': 'application/json'
         });
+
+      headers.append('Authorization', 'Bearer '+ this.authenticationService.getToken());
+
       let options = new RequestOptions({ headers: headers });
       //console.log(headers);
 
