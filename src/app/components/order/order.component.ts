@@ -14,7 +14,7 @@ export class OrderComponent implements OnInit {
 
   orders:OrderItem[]=[];
   cartitems:SearchQuery[];
-  payment: any;S
+  payment: any;
   constructor(private orderService : OrderService, private paymentservice : PaymentService) {
 
   }
