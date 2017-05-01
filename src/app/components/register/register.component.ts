@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../../services/authentication.service'
+import { ShoppingcartService } from '../../services/shoppingcart.service';
 import {Router} from "@angular/router";
 
 @Component({
@@ -12,7 +13,9 @@ export class RegisterComponent implements OnInit {
   error : string;
   model :any={};
 
-  constructor(private router : Router, private authenticationService: AuthenticationService) { }
+  constructor(private router : Router,
+    private authenticationService: AuthenticationService,
+    private cartservice : ShoppingcartService) { }
 
   ngOnInit() {
   }
@@ -24,6 +27,7 @@ export class RegisterComponent implements OnInit {
       .subscribe(
         result => {
           if(result === true){
+            this.cartservice.updateLocalStorageToServer();
             this.router.navigate(['/']);
           } else {
             this.error = 'Registration unsuccessful';
