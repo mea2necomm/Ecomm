@@ -27,8 +27,15 @@ export class RegisterComponent implements OnInit {
       .subscribe(
         result => {
           if(result === true){
-            this.cartservice.updateLocalStorageToServer();
-            this.router.navigate(['/']);
+
+            this.cartservice.updateLocalStorageToServer().subscribe(cartresult =>{
+              if(cartresult===true){
+                this.router.navigate(['/']);
+              }else{
+                console.log("Error while integrating carts");
+              }
+            });
+
           } else {
             this.error = 'Registration unsuccessful';
             this.loading = false;

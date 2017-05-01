@@ -74,14 +74,17 @@ export class ShoppingcartService {
   // this function updates the locally stored cart to the server
   // call on login
   updateLocalStorageToServer(){
+    //return Observable.of(true);
+
     if(this.authenticationService.isLoggedIn()){
       let savedShoppingCart = JSON.parse(localStorage.getItem('mea2necomm-shopping-cart'));
       if(savedShoppingCart) {
 
+
         let headers = new Headers({ 'Accept': 'application/json' });
         headers.append('Authorization', 'Bearer '+ this.authenticationService.getToken());
         let options = new RequestOptions({ headers: headers });
-
+        /*
         this.http.get('/api/shoppingcart/'+ this.authenticationService.currentUser().email,options )
           .map(res => res.json()).subscribe(usercartitems=> {
           this.shoppingCart = usercartitems;
@@ -89,8 +92,27 @@ export class ShoppingcartService {
           //resetting local storage
           localStorage.setItem('mea2necomm-shopping-cart', JSON.stringify([]));
         });
+        */
+
+        //return Observable.of(true);
+        return this.http.get('/api/shoppingcart/'+ this.authenticationService.currentUser().email, options)
+          .map(res => {
+            let usercartitems = res.json();
+            this.shoppingCart = usercartitems;
+            this.addItems(savedShoppingCart);
+            //resetting local storage
+            localStorage.setItem('mea2necomm-shopping-cart', JSON.stringify([]));
+            return true;
+          });
+
+
+      }else{
+        return Observable.of(true);
       }
+    }else{ // user not authenticated
+      return Observable.of(false);
     }
+
   }
 
 
