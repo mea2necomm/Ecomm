@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../../services/authentication.service'
 import { ShoppingcartService } from '../../services/shoppingcart.service';
-import {Router} from "@angular/router";
+import {Router, ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-register',
@@ -12,12 +12,17 @@ export class RegisterComponent implements OnInit {
   loading: boolean;
   error : string;
   model :any={};
-
-  constructor(private router : Router,
+  returnUrl:string;
+  constructor(
+    private router : Router,
     private authenticationService: AuthenticationService,
-    private cartservice : ShoppingcartService) { }
+    private cartservice : ShoppingcartService,
+    private route: ActivatedRoute
+  ) { }
 
   ngOnInit() {
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+    console.log(this.returnUrl);
   }
 
   register(){
@@ -30,7 +35,7 @@ export class RegisterComponent implements OnInit {
 
             this.cartservice.updateLocalStorageToServer().subscribe(cartresult =>{
               if(cartresult===true){
-                this.router.navigate(['/']);
+                this.router.navigate([this.returnUrl]);
               }else{
                 console.log("Error while integrating carts");
               }

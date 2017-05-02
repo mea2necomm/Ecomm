@@ -49,20 +49,24 @@ export const routes: Routes = [
   },
   {
     path: 'checkout',
-    component: CheckoutComponent
+    component: CheckoutComponent,
+    canActivate : [AuthGuard]
   }
   ,
   {
     path: 'success',
-    component: SuccessComponent
+    component: SuccessComponent,
+    canActivate : [AuthGuard]
   },
   {
     path: 'failure',
-    component: FailureComponent
+    component: FailureComponent,
+    canActivate : [AuthGuard]
   },
   {
     path: 'orders',
-    component: OrderComponent
+    component: OrderComponent,
+    canActivate : [AuthGuard]
   },
   {
     path: 'logout',
