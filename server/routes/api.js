@@ -21,6 +21,7 @@ const request = require('request');
 const baseURL = 'http://www.worldholidaysandevents.com/HolidaysRESTJSON/webresources/holidaysandevents';
 const contriesUrl = baseURL+'/countries';
 const statesUrl = baseURL+'/countryStates/';
+const countryCitiesUrl = baseURL+'/countryCities/';
 const citiesUrl = baseURL+'/countryStateCities/';
 
 /* GET api listing. */
@@ -69,6 +70,27 @@ router.get('/countryStates/:country', (req, res) => {
             res.status(200).send(body);
         }
       );
+});
+
+router.get('/countryCities/:country', (req, res) => {
+  request.get(
+    { url: countryCitiesUrl+req.params.country,
+      method:'Get'
+    },
+    function (error, apires, body) {
+      if (error) {
+        res.status(500).send(error);
+        return;
+      }
+
+      if (apires.statusCode != 200 ) {
+        res.status(apires.statusCode).send(apires.statusCode);
+        return;
+      }
+
+      res.status(200).send(body);
+    }
+  );
 });
 
 router.get('/countryStateCities/:state/:country', (req, res) => {

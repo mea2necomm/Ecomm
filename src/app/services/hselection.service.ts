@@ -20,6 +20,10 @@ export class HselectionService {
   .map(res => res.json());
   }
 
+  getCountryCites(country) {
+    return this.http.get('/api/countryCities/'+country).map(res => res.json());
+  }
+
   getCities(state,country) {
   return this.http.get('/api/countryStateCities/'+state + '/' + country)
   .map(res => res.json());

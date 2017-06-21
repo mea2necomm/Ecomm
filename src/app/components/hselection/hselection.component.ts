@@ -54,10 +54,15 @@ export class HselectionComponent implements OnInit {
   countrySelect(country){
   this.hselectionService.getStates(country).subscribe(states =>
   {
-
-    this.states = states.theList;
-    this.selectedcountry = country;
-    this.submitenabled = true;
+    this.hselectionService.getCountryCites(country).subscribe(cities =>
+    {
+      this.cities = cities.theList;
+      this.states = states.theList;
+      this.selectedcountry = country;
+      this.selectedstate = "State";
+      this.selectedcity = "City";
+      this.submitenabled = true;
+    });
 
   });
   }
