@@ -7,5 +7,9 @@ export interface SearchQuery{
   state:string,
   city:string,
   fromYear:number,
-  toYear:number
+  fromMonth:number,
+  fromDay:number,
+  toYear:number,
+  toMonth:number,
+  toDay:number
 }

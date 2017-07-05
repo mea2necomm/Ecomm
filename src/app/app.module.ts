@@ -25,6 +25,7 @@ import { SuccessComponent } from './components/common/success.component';
 import { FailureComponent } from './components/common/failure.component';
 import { OrderComponent } from './components/order/order.component';
 import {LogoutComponent} from "./components/common/logout.component";
+import { MyDatePickerModule } from 'mydatepicker';
 
 // Define the routes
 
@@ -48,6 +49,7 @@ import {LogoutComponent} from "./components/common/logout.component";
     BrowserModule,
     FormsModule,
     HttpModule,
+    MyDatePickerModule,
     RouterModule.forRoot(routes) // Add routes to the app
   ],
   providers: [

@@ -2,7 +2,7 @@
 
 <div id="selectionbar" class="panel-body">
   <h3 class="text-center">
-    Search Holidays
+    World Holidays and Events
   </h3>
   <hr/>
 <div class="container">
@@ -55,12 +55,18 @@
   <div class="col-xs-12">
     <form class="form-inline text-center">
       <fieldset>
-        <div class="form-group">
-          <input [(ngModel)]="fromDate" name = "fromDate" class="form-control" id="fromDate" placeholder="From (YYYY)" type="text">
-          <input [(ngModel)]="toDate" name = "toDate" class="form-control" id="toDate" placeholder="To (YYYY)" type="text">
+        <div>
+          <input [(ngModel)]="yearselect" name="yearselect" id="yearselect" placeholder="Select Year (YYYY)" class="form-control" type="text" [disabled]="yearentry">
+          <button class="btn btn-primary form-control" (click)="showDate()" >Alternate time</button>
+        </div>
+        <div *ngIf="showAdvDate" class="form-group" >
+          <!--<input [(ngModel)]="fromDate" name = "fromDate" class="form-control" id="fromDate" placeholder="From (YYYY)" type="text">-->
+          <my-date-picker [options]="myFromDateOptions" (dateChanged)="onFromDateChanged($event)"></my-date-picker>
+          <my-date-picker [options]="myToDateOptions" (dateChanged)="onToDateChanged($event)"></my-date-picker>
+          <!--<input [(ngModel)]="toDate" name = "toDate" class="form-control" id="toDate" placeholder="To (YYYY)" type="text">-->
         </div>
         <div>
-          <button *ngIf="datecheck()" type="submit" class="btn btn-primary form-control"  [disabled]="enablesubmit()" [routerLink]="['/freeholidaylist',selectedcountry,selectedstate,selectedcity,fromDate,toDate]" >Get Holidays</button>
+          <button *ngIf="datecheck()" type="submit" class="btn btn-primary form-control"  [disabled]="enablesubmit()" (click)="fetchHolidays()" >Get Holidays</button>
           <button *ngIf="!datecheck()" type="submit" class="btn btn-primary form-control"  [disabled]="enablesubmit()" (click)="addtocart()">&nbsp;Add to Cart</button>
         </div>
       </fieldset>

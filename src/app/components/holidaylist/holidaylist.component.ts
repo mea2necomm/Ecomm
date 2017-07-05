@@ -13,6 +13,12 @@ export class HolidaylistComponent implements OnInit {
   state: any;
   city : any;
   fromdate : any;
+  fromyear: any;
+  frommonth : any;
+  fromday : any;
+  toyear: any;
+  tomonth : any;
+  today : any;
   todate : any;
   paramsSub: any;
   holidays : any =[];
@@ -42,14 +48,25 @@ export class HolidaylistComponent implements OnInit {
       if(this.city == 'City'){
         this.city = 'none';
       }
-      this.fromdate = params['fromdate'];
-      this.todate = params['todate'];
+
+      this.fromyear = params['fromyear'];
+      this.frommonth = params['frommonth'];
+      this.fromday = params['fromday'];
+
+      this.toyear = params['toyear'];
+      this.tomonth = params['tomonth'];
+      this.today = params['today'];
+
       var data = {
         country : this.country,
         state: this.state,
         city: this.city,
-        fromYear: this.fromdate,
-        toYear: this.todate
+        fromYear: this.fromyear,
+        fromMonth: this.frommonth,
+        fromDay: this.fromday,
+        toYear: this.toyear,
+        toMonth: this.tomonth,
+        toDay: this.today
       };
 
       if(this.route == 'freeholidaylist'){

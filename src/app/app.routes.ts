@@ -27,12 +27,12 @@ export const routes: Routes = [
     component : HselectionComponent
   },
   {
-    path : 'holidaylist/:country/:state/:city/:fromdate/:todate',
+    path : 'holidaylist/:country/:state/:city/:fromyear/:frommonth/:fromday/:toyear/:tomonth/:today',
     component: HolidaylistComponent,
     canActivate : [AuthGuard]
   },
   {
-    path : 'freeholidaylist/:country/:state/:city/:fromdate/:todate',
+    path : 'freeholidaylist/:country/:state/:city/:fromyear/:frommonth/:fromday/:toyear/:tomonth/:today',
     component: HolidaylistComponent
   },
   {

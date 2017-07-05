@@ -30,7 +30,7 @@
 </div>
 
 <div id="orderModal" class="modal fade">
-  <div class="modal-dialog">
+  <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -53,7 +53,8 @@
             <td *ngIf="item.state == 'State'">No state Selected</td>
             <td *ngIf="item.city != 'City'">{{item.city}}</td>
             <td *ngIf="item.city == 'City'">No city selected</td>
-            <td>{{item.fromYear}}&nbsp;-&nbsp;{{item.toYear}} </td>
+            <td>{{item.fromMonth}}/{{item.fromDay}}/{{item.fromYear}}&nbsp;-&nbsp;{{item.toMonth}}/{{item.toDay}}/{{item.toYear}} </td>
+            <td><button type="button" class="btn btn-info" data-dismiss="modal" [routerLink]="['/holidaylist',item.country,item.state,item.city,item.fromYear,item.fromMonth,item.fromDay,item.toYear,item.toMonth,item.toDay]">View Holidays</button></td>
           </tr>
           </tbody>
         </table>

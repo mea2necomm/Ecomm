@@ -1,8 +1,8 @@
 import {Component, OnInit, Input} from '@angular/core';
-
 import { HselectionService } from '../../services/hselection.service'
 import { ShoppingcartService } from '../../services/shoppingcart.service'
 import { Router } from '@angular/router'
+import {IMyDpOptions, IMyDateModel} from "mydatepicker";
 
 @Component({
 moduleId: module.id,
@@ -11,6 +11,26 @@ moduleId: module.id,
   styleUrls: ['hselection.component.css']
 })
 export class HselectionComponent implements OnInit {
+  private myFromDateOptions: IMyDpOptions = {
+    height: '34px',
+    width: '210px',
+    disableSince: {year: 0, month: 0, day: 0},
+    alignSelectorRight: false,
+    openSelectorTopOfInput: false,
+    indicateInvalidDate: true,
+    monthSelector: true,
+    yearSelector: true
+  };
+  private myToDateOptions: IMyDpOptions = {
+    height: '34px',
+    width: '210px',
+    disableUntil: {year: 0, month: 0, day: 0},
+    alignSelectorRight: false,
+    openSelectorTopOfInput: false,
+    indicateInvalidDate: true,
+    monthSelector: true,
+    yearSelector: true
+  };
   selectedcountry:string = "Country";
   selectedstate:string = "State";
   selectedcity:string = "City";
@@ -24,9 +44,11 @@ export class HselectionComponent implements OnInit {
   date: any;
   cartnumber: number;
   currentyear: number;
-
-  fromDate:number;
-  toDate:number;
+  showAdvDate: boolean = false;
+  yearentry: boolean = false;
+  yearselect: number;
+  fromDate:any = null;
+  toDate:any = null;
   submitenabled: boolean = false;
   constructor(
     private hselectionService:HselectionService,
@@ -68,7 +90,15 @@ export class HselectionComponent implements OnInit {
   }
 
   enablesubmit(){
-    if(this.submitenabled && this.fromDate > 1200 && this.fromDate < 9999 && this.toDate > 1200 && this.toDate < 9999 && this.fromDate <= this.toDate){
+    if(this.submitenabled && this.fromDate != null && this.toDate != null){
+      if(this.fromDate.year > 0 && this.toDate.year > 0){
+        return false;
+      }
+      else{
+        return true;
+      }
+    }
+    else if (this.submitenabled && this.yearselect > 1200 && this.yearselect < 9999){
       return false;
     }
     else{
@@ -77,13 +107,19 @@ export class HselectionComponent implements OnInit {
   }
 
   datecheck(){
-    if(this.currentyear >= this.toDate){
+    if(this.currentyear >= this.yearselect && this.yearselect != null){
       return true;
+    }
+    else if(this.toDate !=null){
+      if(this.currentyear >= this.toDate.year){
+        return true;
+      }
     }
     else {
       return false;
     }
   }
+
   stateSelect(state){
   this.hselectionService.getCities(state,this.selectedcountry).subscribe(cities =>
   {
@@ -96,41 +132,80 @@ export class HselectionComponent implements OnInit {
     this.selectedcity = city;
   }
 
-  fetchHolidays(event){
-    event.preventDefault();
-    console.log(this.toDate);
-    console.log(this.fromDate);
+  fetchHolidays(){
     if(!this.selectedstate){
       this.selectedstate = 'none';
     }
     if(!this.selectedcity){
       this.selectedcity = 'none';
     }
-    var data = {
-      country : this.selectedcountry,
-      state: this.selectedstate,
-      city: this.selectedcity,
-      fromDate: this.fromDate,
-      toDate: this.toDate
-    };
-    this.hselectionService.getHolidays(data).subscribe(holidays =>
-    {
-      this.holidays = holidays.theList;
-      console.log(this.holidays);
-    });
+    if(this.yearentry){
+      console.log(this.toDate.year+"/"+this.toDate.month+"/"+this.toDate.day);
+      console.log(this.fromDate.year+"/"+this.fromDate.month+"/"+this.fromDate.day);
+      this.router.navigate(['/freeholidaylist',this.selectedcountry,this.selectedstate,this.selectedcity,this.fromDate.year,this.fromDate.month,this.fromDate.day,this.toDate.year,this.toDate.month,this.toDate.day])
+    }
+    else{
+      this.router.navigate(['/freeholidaylist',this.selectedcountry,this.selectedstate,this.selectedcity,this.yearselect,'1','1',this.yearselect,'12','31']);
+    }
+  }
 
+  showDate(){
+    this.showAdvDate = !this.showAdvDate;
+    this.yearselect = null;
+    this.fromDate = null;
+    this.toDate = null;
+    this.yearentry = !this.yearentry;
+  }
 
+  onFromDateChanged(event: IMyDateModel){
+    console.log(event.date);
+    let toOptions = JSON.parse(JSON.stringify(this.myToDateOptions));
+    toOptions.disableUntil = {year:event.date.year,month:event.date.month,day:event.date.day};
+    this.myToDateOptions = toOptions;
+    this.fromDate = event.date;
+  }
+
+  onToDateChanged(event: IMyDateModel){
+    console.log(event.date);
+    let fromOptions = JSON.parse(JSON.stringify(this.myFromDateOptions));
+    fromOptions.disableSince = {year:event.date.year,month:event.date.month,day:event.date.day};
+    this.myFromDateOptions = fromOptions;
+    this.toDate = event.date;
   }
 
   addtocart(){
-    //check orders, if in oreders go to holiday list, else add to cart
-    var data = {
+    //check orders, if in orders go to holiday list, else add to cart
+
+    //check if only one year is entered or date range, create from date and to date accordingly
+
+    let data = {
       country : this.selectedcountry,
       state: this.selectedstate,
       city: this.selectedcity,
-      fromYear: this.fromDate,
-      toYear: this.toDate
+      fromYear: 0,
+      fromMonth: 0,
+      fromDay: 0,
+      toYear: 0,
+      toMonth: 0,
+      toDay: 0
     };
+    if(this.yearentry){
+      data.fromYear = this.fromDate.year;
+      data.fromMonth = this.fromDate.month;
+      data.fromDay = this.fromDate.day;
+      data.toYear = this.toDate.year;
+      data.toMonth = this.toDate.month;
+      data.toDay = this.toDate.day;
+    }
+    else {
+      data.fromYear = this.yearselect;
+      data.fromMonth = 1;
+      data.fromDay = 1;
+      data.toYear = this.yearselect;
+      data.toMonth = 12;
+      data.toDay = 31;
+    }
+    console.log(data);
     this.cartservice.addItem(data);
 
     this.cartservice.getShoppingCart().subscribe(cartItems =>
@@ -139,16 +214,5 @@ export class HselectionComponent implements OnInit {
       console.log("cartnumber" + this.cartnumber);
     });
 
-    //this.cartnumber = this.cartservice.getShoppingCart().length;
-
-    /*this.router.navigate([
-      '/holidaylist/'
-      +this.selectedcountry+'/'
-      +this.selectedstate+'/'
-      +this.selectedcity+'/'
-      +this.fromDate+'/'
-      +this.toDate
-    ]);
-    */
   }
 }
