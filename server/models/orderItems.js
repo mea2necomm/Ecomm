@@ -6,7 +6,11 @@ var cartItemSchema = new mongoose.Schema({
   state: String,
   city: String,
   fromYear: Number,
-  toYear: Number
+  fromMonth: Number,
+  fromDay: Number,
+  toYear: Number,
+  toMonth: Number,
+  toDay: Number
 });
 
 
