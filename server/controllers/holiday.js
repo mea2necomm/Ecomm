@@ -12,9 +12,9 @@ var sendJSONresponse = function(res, status, content) {
 };
 
 module.exports.findfreeholidays = function (req, res) {
-  if(req.params.todate <= new Date().getFullYear()){
+  if(req.params.toyear <= new Date().getFullYear()){
     request.get(
-      { url: holidaysUrl+ req.params.country+'/'+req.params.state+'/'+req.params.city+'/'+req.params.fromdate+'/1/1/'+req.params.todate+'/12/31',
+      { url: holidaysUrl+ req.params.country+'/'+req.params.state+'/'+req.params.city+'/'+req.params.fromyear+'/'+req.params.frommonth+'/'+req.params.fromday+'/'+req.params.toyear+'/'+req.params.tomonth+'/'+req.params.today,
         method:'Get'
       },
       function (error, apires, body) {
@@ -39,17 +39,27 @@ module.exports.findfreeholidays = function (req, res) {
 };
 
 module.exports.findHolidays = function(req,res){
+  console.log("find holidays called");
   var country = req.params.country;
   var state = (req.params.state == 'none')?'State': req.params.state ;
   var city = (req.params.city == 'none')?'City': req.params.city ;
-  var todate = req.params.todate;
-  var fromdate =req.params.fromdate;
+  var toyear = req.params.toyear;
+  var tomonth = req.params.tomonth;
+  var today = req.params.today;
+  var fromyear =req.params.fromyear;
+  var frommonth = req.params.frommonth;
+  var fromday = req.params.fromday;
+
   var data = {
     'country':country,
     'state':state,
     'city':city,
-    'toYear':todate,
-    'fromYear':fromdate
+    'toYear':toyear,
+    'toMonth':tomonth,
+    'toDay':today,
+    'fromYear':fromyear,
+    'fromMonth':frommonth,
+    'fromDay':fromday
   };
   Order.find({useremail:req.payload.email}).
     where('cartItems').elemMatch(data).
@@ -65,7 +75,7 @@ module.exports.findHolidays = function(req,res){
         if(result.length > 0){
           getAuthor(req,res, function(req,res, userName){
             request.get(
-              { url: holidaysUrl+ req.params.country+'/'+req.params.state+'/'+req.params.city+'/'+req.params.fromdate+'/1/1/'+req.params.todate+'/12/31',
+              { url: holidaysUrl+ req.params.country+'/'+req.params.state+'/'+req.params.city+'/'+req.params.fromyear+'/'+req.params.frommonth+'/'+req.params.fromday+'/'+req.params.toyear+'/'+req.params.tomonth+'/'+req.params.today,
                 method:'Get'
               },
               function (error, apires, body) {

@@ -118,10 +118,10 @@ router.get('/currentyear', (req, res) =>{
   res.status(200).send(year);
 });
 //added auth to secure the holidays
-router.get('/holidays/:country/:state/:city/:fromdate/:todate', auth,
+router.get('/holidays/:country/:state/:city/:fromyear/:frommonth/:fromday/:toyear/:tomonth/:today', auth,
   ctrlHoliday.findHolidays);
 
-router.get('/freeholidays/:country/:state/:city/:fromdate/:todate', ctrlHoliday.findfreeholidays);
+router.get('/freeholidays/:country/:state/:city/:fromyear/:frommonth/:fromday/:toyear/:tomonth/:today', ctrlHoliday.findfreeholidays);
 
 router.post('/shoppingcart',auth, ctrlShoppingCart.saveCart);
 router.get('/shoppingcart/:useremail', auth, ctrlShoppingCart.getShoppingCart);
