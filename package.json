@@ -42,6 +42,7 @@
     "karma-jasmine": "~1.1.0",
     "karma-jasmine-html-reporter": "^0.2.2",
     "mongoose": "^4.9.2",
+    "mydatepicker": "^2.0.21",
     "passport": "^0.3.2",
     "passport-local": "^1.0.0",
     "paypal-rest-sdk": "^1.7.1",
