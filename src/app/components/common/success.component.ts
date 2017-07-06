@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   moduleId: module.id,
@@ -6,8 +7,12 @@ import {Component, OnInit} from '@angular/core';
   templateUrl: 'success.component.html'
 })
 export class SuccessComponent implements OnInit {
-  constructor(){ }
+  constructor(private router: Router){ }
 
-  ngOnInit() { }
+  ngOnInit() {
+    setTimeout(() => {
+      this.router.navigate(['/orders']);
+    }, 5000);
+  }
 
 }
