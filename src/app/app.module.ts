@@ -26,6 +26,10 @@ import { FailureComponent } from './components/common/failure.component';
 import { OrderComponent } from './components/order/order.component';
 import {LogoutComponent} from "./components/common/logout.component";
 import { MyDatePickerModule } from 'mydatepicker';
+import { InstructionsComponent } from './components/common/instructions.component';
+import { PricingComponent } from './components/common/pricing.component';
+import { InfoComponent } from  './components/common/info.component'
+
 
 // Define the routes
 
@@ -43,7 +47,10 @@ import { MyDatePickerModule } from 'mydatepicker';
     SuccessComponent,
     FailureComponent,
     OrderComponent,
-    LogoutComponent
+    LogoutComponent,
+    InstructionsComponent,
+    PricingComponent,
+    InfoComponent
   ],
   imports: [
     BrowserModule,

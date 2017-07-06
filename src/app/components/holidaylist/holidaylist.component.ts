@@ -12,14 +12,12 @@ export class HolidaylistComponent implements OnInit {
   country: any;
   state: any;
   city : any;
-  fromdate : any;
   fromyear: any;
   frommonth : any;
   fromday : any;
   toyear: any;
   tomonth : any;
   today : any;
-  todate : any;
   paramsSub: any;
   holidays : any =[];
   businessesClosed:string;
@@ -35,7 +33,6 @@ export class HolidaylistComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    console.log(this.activatedRoute.snapshot.url[0].path);
     this.route = this.activatedRoute.snapshot.url[0].path;
     this.paramsSub = this.activatedRoute.params.subscribe(params => {
 

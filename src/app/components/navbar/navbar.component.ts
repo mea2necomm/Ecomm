@@ -1,7 +1,7 @@
 import {Component, OnInit, ChangeDetectorRef, Input} from '@angular/core';
 import { AuthenticationService } from '../../services/authentication.service';
 import { ShoppingcartService } from '../../services/shoppingcart.service'
-import { Router } from '@angular/router';
+import { Router,ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -14,13 +14,30 @@ export class NavbarComponent implements OnInit {
   isloggedin: boolean;
   @Input() cartnumber: number;
   numitems: number;
+  route: string;
+  selection: number;
 
   constructor(
     private authenticationService: AuthenticationService,
     private router: Router,
-    private cartservice : ShoppingcartService
+    private cartservice : ShoppingcartService,
+    private activatedRoute: ActivatedRoute
   ) {
     console.log(this.cartnumber);
+    this.route = this.activatedRoute.snapshot.url[0].path;
+    if(this.route == "hselection" || this.route == "holidaylist" || this.route == "freeholidaylist")
+    {
+      this.selection = 1;
+    }
+    else if (this.route == "instructions"){
+      this.selection = 2;
+    }
+    else if (this.route == "pricing"){
+      this.selection = 3;
+    }
+    else if (this.route == "info"){
+      this.selection = 4;
+    }
     this.isloggedin = authenticationService.isLoggedIn();
     let curuser:any = authenticationService.currentUser();
     if(curuser !== false){

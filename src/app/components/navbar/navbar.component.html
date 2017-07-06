@@ -12,7 +12,10 @@
 
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="#" id="btnholidaysearch">Search Holidays<span class="sr-only">(current)</span></a></li>
+        <li [ngClass]="{active: selection == 1}"><a href="#" id="btnholidaysearch">Search Holidays<span class="sr-only">(current)</span></a></li>
+        <li [ngClass]="{active: selection == 2}"><a href="/instructions" >Instructions</a></li>
+        <li [ngClass]="{active: selection == 3}"><a href="/pricing" >Pricing</a></li>
+        <li [ngClass]="{active: selection == 4}"><a href="/info" >General Information</a></li>
       </ul>
 
 

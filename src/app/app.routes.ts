@@ -11,6 +11,9 @@ import { SuccessComponent } from './components/common/success.component';
 import { FailureComponent } from './components/common/failure.component';
 import { OrderComponent} from './components/order/order.component';
 import {LogoutComponent} from "./components/common/logout.component";
+import {InstructionsComponent} from "./components/common/instructions.component";
+import {PricingComponent} from "./components/common/pricing.component";
+import {InfoComponent} from "./components/common/info.component";
 
 export const routes: Routes = [
   {
@@ -71,5 +74,18 @@ export const routes: Routes = [
   {
     path: 'logout',
     component: LogoutComponent
+  },
+  {
+    path: 'instructions',
+    component: InstructionsComponent
+  },
+  {
+    path: 'pricing',
+    component: PricingComponent
+  },
+  {
+    path: 'info',
+    component: InfoComponent
   }
-  ];
+
+];
