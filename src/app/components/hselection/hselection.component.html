@@ -60,10 +60,11 @@
           <button class="btn btn-primary form-control" (click)="showDate()" >Alternate time</button>
         </div>
         <div *ngIf="showAdvDate" class="form-group" >
-          <!--<input [(ngModel)]="fromDate" name = "fromDate" class="form-control" id="fromDate" placeholder="From (YYYY)" type="text">-->
-          <my-date-picker [options]="myFromDateOptions" (dateChanged)="onFromDateChanged($event)"></my-date-picker>
-          <my-date-picker [options]="myToDateOptions" (dateChanged)="onToDateChanged($event)"></my-date-picker>
-          <!--<input [(ngModel)]="toDate" name = "toDate" class="form-control" id="toDate" placeholder="To (YYYY)" type="text">-->
+          <my-date-picker [options]="myFromDateOptions" [placeholder]="fromdateplaceholder" (dateChanged)="onFromDateChanged($event)"></my-date-picker>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <my-date-picker [options]="myToDateOptions" [placeholder]="todateplaceholder" (dateChanged)="onToDateChanged($event)"></my-date-picker>
+          <br>
+          <br>
         </div>
         <div>
           <button *ngIf="datecheck()" type="submit" class="btn btn-primary form-control"  [disabled]="enablesubmit()" (click)="fetchHolidays()" >Get Holidays</button>

@@ -19,7 +19,8 @@ export class HselectionComponent implements OnInit {
     openSelectorTopOfInput: false,
     indicateInvalidDate: true,
     monthSelector: true,
-    yearSelector: true
+    yearSelector: true,
+    dateFormat: 'mm/dd/yyyy'
   };
   private myToDateOptions: IMyDpOptions = {
     height: '34px',
@@ -29,7 +30,8 @@ export class HselectionComponent implements OnInit {
     openSelectorTopOfInput: false,
     indicateInvalidDate: true,
     monthSelector: true,
-    yearSelector: true
+    yearSelector: true,
+    dateFormat: 'mm/dd/yyyy'
   };
   selectedcountry:string = "Country";
   selectedstate:string = "State";
@@ -37,6 +39,8 @@ export class HselectionComponent implements OnInit {
   @Input() country: string;
   @Input() state: string;
   @Input() city: string;
+  fromdateplaceholder: string = "From Date (MM/DD/YYYY)";
+  todateplaceholder: string = "To Date (MM/DD/YYYY)";
 	countries: any = [];
   states: any = [];
   cities: any = [];
