@@ -42,7 +42,11 @@ export class NavbarComponent implements OnInit {
     let curuser:any = authenticationService.currentUser();
     if(curuser !== false){
       this.currentUser = curuser;
+      console.log("checking if this is executed");
       console.log(this.currentUser);
+      if(this.currentUser!=null) {
+        console.log("user role:" + this.currentUser.role);
+      }
     }
     //this.numitems = this.cartservice.getItemNum();
 

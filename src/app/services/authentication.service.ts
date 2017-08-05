@@ -82,7 +82,8 @@ export class AuthenticationService {
       var payload = JSON.parse(atob(token().split('.')[1]));
       var user = {
         name: payload.fname,
-        email: payload.email
+        email: payload.email,
+        role: payload.role
       };
       return user;
     }

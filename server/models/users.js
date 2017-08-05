@@ -16,6 +16,10 @@ var userSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  role: {
+    type: String,
+    required: false
+  },
   hash: String,
   salt: String
 });
@@ -39,6 +43,7 @@ userSchema.methods.generateJwt = function() {
     email: this.email,
     fname: this.fname,
     lname: this.lname,
+    role: this.role,
     exp: parseInt(expiry.getTime() / 1000),
   }, process.env.JWT_SECRET); // The secret is kept as an environment variable
 };
