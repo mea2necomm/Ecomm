@@ -6,6 +6,7 @@ import {Observable} from "rxjs";
 import {SearchQuery} from "../models/SearchQuery";
 import {OrderService} from "./order.service";
 import {Router} from '@angular/router';
+import { AuthenticationService } from '../services/authentication.service';
 
 @Injectable()
 export class PaymentService {
@@ -14,6 +15,7 @@ export class PaymentService {
   constructor(
     private http: Http,
     private orderservice : OrderService,
+    private authservice: AuthenticationService,
     private router : Router
   ) { }
 
@@ -66,5 +68,18 @@ export class PaymentService {
     return this.http.get('/api/payment/'+paymentid).map(res => res.json());
   }
 
+  getPricing(){
+    if(this.authservice.isLoggedIn()) {
+
+      let headers = new Headers({ 'Accept': 'application/json' });
+      headers.append('Authorization', 'Bearer '+ this.authservice.getToken());
+      let options = new RequestOptions({ headers: headers });
+
+      var user = this.authservice.currentUser();
+
+      return this.http.get('/api/pricing/',options)
+        .map(res => res.json());
+    }
+  }
 
 }

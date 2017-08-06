@@ -14,8 +14,9 @@
       <ul class="nav navbar-nav">
         <li [ngClass]="{active: selection == 1}"><a href="#" id="btnholidaysearch">Search Holidays<span class="sr-only">(current)</span></a></li>
         <li [ngClass]="{active: selection == 2}"><a href="/instructions" >Instructions</a></li>
-        <li [ngClass]="{active: selection == 3}"><a href="/pricing" >Pricing</a></li>
+        <li *ngIf="role=='administrator'" [ngClass]="{active: selection == 3}"><a href="/pricing" >Pricing</a></li>
         <li [ngClass]="{active: selection == 4}"><a href="/info" >General Information</a></li>
+        <li *ngIf="role=='administrator'" [ngClass]="{active: selection == 5}"><a href="/info" >Change Price</a></li>
       </ul>
 
 
