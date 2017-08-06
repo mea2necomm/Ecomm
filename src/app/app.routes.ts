@@ -15,6 +15,7 @@ import {InstructionsComponent} from "./components/common/instructions.component"
 import {PricingComponent} from "./components/common/pricing.component";
 import {InfoComponent} from "./components/common/info.component";
 import {PricechangerComponent} from "./components/admin/pricechanger/pricechanger.component";
+import {ResetpasswordComponent} from './components/admin/resetpassword/resetpassword.component';
 
 export const routes: Routes = [
   {
@@ -87,6 +88,10 @@ export const routes: Routes = [
   {
     path: 'pricechanger',
     component: PricechangerComponent
+  },
+  {
+    path: 'pwdreset',
+    component: ResetpasswordComponent
   },
   {
     path: 'info',
