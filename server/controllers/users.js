@@ -166,7 +166,7 @@ module.exports.resetPassword = function(req,res){
 
     /*update database with new ssid*/
     User
-      .findOne({ email : req.payload.email })
+      .findOne({ email : req.body.useremail })
       .exec(function(err, user) {
         if (!user) {
           console.log("user not found");
