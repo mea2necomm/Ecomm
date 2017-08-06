@@ -14,7 +14,7 @@ var sendJSONresponse = function(res, status, content) {
 
 module.exports.getPricing = function(req,res){
   console.log('getPricing called');
-  getAuthor(req,res, function(req, res,username) {
+  //getAuthor(req,res, function(req, res,username) {
 
 
     // console.log(JSON.stringify(req.body));
@@ -31,7 +31,8 @@ module.exports.getPricing = function(req,res){
 
     });
 
-  })};
+  //})
+};
 
 
 var getAuthor = function(req, res, callback) {

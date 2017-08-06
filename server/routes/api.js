@@ -139,7 +139,7 @@ router.get('/orders/:useremail', auth, orders.getOrders);
 
 router.get('/payment/:paymentid', paypal.get);
 
-router.get('/pricing/', auth, pricing.getPricing);
+router.get('/pricing/', pricing.getPricing);
 
 router.get('/users/', auth, ctrlUsers.getUsers);
 

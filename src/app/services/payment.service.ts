@@ -69,17 +69,14 @@ export class PaymentService {
   }
 
   getPricing(){
-    if(this.authservice.isLoggedIn()) {
-
       let headers = new Headers({ 'Accept': 'application/json' });
-      headers.append('Authorization', 'Bearer '+ this.authservice.getToken());
+      //headers.append('Authorization', 'Bearer '+ this.authservice.getToken());
       let options = new RequestOptions({ headers: headers });
 
-      var user = this.authservice.currentUser();
+      //var user = this.authservice.currentUser();
 
       return this.http.get('/api/pricing/',options)
         .map(res => res.json());
-    }
   }
 
 }
