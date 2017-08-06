@@ -35,6 +35,82 @@ module.exports.getUsers = function(req,res){
   })
 };
 
+
+module.exports.getUserByUUID = function(req,res){
+  console.log('getuserbyuuid called');
+
+    console.log("getting user by uuid..." + req.params.requesteduuid);
+    // console.log(JSON.stringify(req.body));
+
+    if(!req.params || !req.params.requesteduuid){
+      sendJSONresponse(res,400,"request does not have uuid");
+    }
+    User.findOne({resetuuid :req.params.requesteduuid}).exec(function(error, user){
+      // console.log("usercartitems: " + usercartitems);
+      if(error)
+        sendJSONresponse(res,404,error);
+      if(!user)
+        sendJSONresponse(res,200,null);
+      else
+        sendJSONresponse(res,200,user);
+
+    });
+
+
+};
+
+module.exports.changePassword = function(req,res){
+  console.log('changePassword called');
+
+    console.log(req.body);
+    if(!req.body.requesteduuid || !req.body.password) {
+      console.log("Error while change password: uuid needed");
+      sendJSONresponse(res, 400, {
+        "message": "All fields required"
+      });
+      return;
+    }
+
+    console.log("updating password for ..." + req.body.requesteduuid + " with " + req.body.password);
+
+  User
+    .findOne({ resetuuid :req.body.requesteduuid })
+    .exec(function(err, user) {
+      if (!user) {
+        console.log("user not found");
+        sendJSONresponse(res, 404, {
+          "message": "User not found"
+        });
+        return;
+      } else if (err) {
+        console.log(err);
+        sendJSONresponse(res, 404, err);
+        return;
+      }
+      console.log("user found");
+      user.resetuuid = null;
+      user.resetdate = new Date();
+      user.setPassword(req.body.password);
+      user.save(function(err){
+        if(err){
+          console.log("error while saving reset info to database");
+          sendJSONresponse(res, 400, {
+            "message": "Unable to save to db"
+          });
+        }else{
+          console.log("saved reset info to database successfully");
+          sendJSONresponse(res, 200, {
+            "message": "Successfully changed password"
+          });
+        }
+      });
+    });
+
+
+    // console.log(JSON.stringify(req.body));
+
+};
+
 module.exports.resetPassword = function(req,res){
   console.log('resetPassword called');
   getAuthor(req,res,function(req, res, username) {
@@ -50,6 +126,7 @@ module.exports.resetPassword = function(req,res){
     console.log("sending reset password mail..." + req.body.useremail);
     // console.log(JSON.stringify(req.body));
 
+    /*send reset email*/
 
     var transporter = nodemailer.createTransport({
       service: 'Gmail',
@@ -85,12 +162,38 @@ module.exports.resetPassword = function(req,res){
       };
     });
 
+    /*end send email*/
 
+    /*update database with new ssid*/
+    User
+      .findOne({ email : req.payload.email })
+      .exec(function(err, user) {
+        if (!user) {
+          console.log("user not found");
+          sendJSONresponse(res, 404, {
+            "message": "User not found"
+          });
+          return;
+        } else if (err) {
+          console.log(err);
+          sendJSONresponse(res, 404, err);
+          return;
+        }
+        console.log("user found");
+        user.resetuuid = tempuuid;
+        user.resetdate = new Date();
+
+        user.save(function(err){
+          if(err){
+            console.log("error while saving reset info to database");
+          }else{
+            console.log("saved reset info to database successfully");
+          }
+        });
+      });
 
   })
 };
-
-
 
 var getAuthor = function(req, res, callback) {
   console.log("reached getAuthor");

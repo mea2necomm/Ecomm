@@ -32,6 +32,7 @@ import { InfoComponent } from  './components/common/info.component';
 import { PricechangerComponent } from './components/admin/pricechanger/pricechanger.component';
 import {UsersService} from './services/users.service';
 import { ResetpasswordComponent } from './components/admin/resetpassword/resetpassword.component';
+import { ChangepasswordComponent } from './components/admin/changepassword/changepassword.component';
 
 
 // Define the routes
@@ -55,7 +56,8 @@ import { ResetpasswordComponent } from './components/admin/resetpassword/resetpa
     PricingComponent,
     InfoComponent,
     PricechangerComponent,
-    ResetpasswordComponent
+    ResetpasswordComponent,
+    ChangepasswordComponent
   ],
   imports: [
     BrowserModule,

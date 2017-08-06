@@ -16,6 +16,7 @@ import {PricingComponent} from "./components/common/pricing.component";
 import {InfoComponent} from "./components/common/info.component";
 import {PricechangerComponent} from "./components/admin/pricechanger/pricechanger.component";
 import {ResetpasswordComponent} from './components/admin/resetpassword/resetpassword.component';
+import {ChangepasswordComponent} from './components/admin/changepassword/changepassword.component'
 
 export const routes: Routes = [
   {
@@ -92,6 +93,10 @@ export const routes: Routes = [
   {
     path: 'pwdreset',
     component: ResetpasswordComponent
+  },
+  {
+      path: 'changepassword/:requesteduuid',
+    component: ChangepasswordComponent
   },
   {
     path: 'info',

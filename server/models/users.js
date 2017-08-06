@@ -20,6 +20,14 @@ var userSchema = new mongoose.Schema({
     type: String,
     required: false
   },
+  resetuuid: {
+    type: String,
+    required: false
+  },
+  resetdate: {
+    type: Date,
+    required: false
+  },
   hash: String,
   salt: String
 });

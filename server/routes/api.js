@@ -145,4 +145,8 @@ router.get('/users/', auth, ctrlUsers.getUsers);
 
 router.post('/resetpassword',auth,ctrlUsers.resetPassword);
 
+router.get('/uuiduser/:requesteduuid',ctrlUsers.getUserByUUID);
+
+
+router.post('/changepassword',ctrlUsers.changePassword);
 module.exports = router;
