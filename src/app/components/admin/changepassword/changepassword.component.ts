@@ -11,6 +11,7 @@ export class ChangepasswordComponent implements OnInit {
 
   private requesteduuid:string = null;
   private user:any = null;
+  private updateresult:string ="";
   constructor(private userservice:UsersService,
   private activatedRoute: ActivatedRoute
   ) { }
@@ -39,8 +40,10 @@ export class ChangepasswordComponent implements OnInit {
     this.userservice.updatePassword(this.requesteduuid,pass).subscribe(result =>{
       if(result){
         console.log(result);
+        this.updateresult = "Successful!";
       }else{
         console.log("Error while changing password");
+        this.updateresult = "Unsuccessful";
       }
     });
   }
