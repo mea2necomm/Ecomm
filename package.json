@@ -43,6 +43,7 @@
     "karma-jasmine-html-reporter": "^0.2.2",
     "mongoose": "^4.9.2",
     "mydatepicker": "^2.0.21",
+    "nodemailer": "^4.0.1",
     "passport": "^0.3.2",
     "passport-local": "^1.0.0",
     "paypal-rest-sdk": "^1.7.1",
@@ -51,6 +52,7 @@
     "ts-node": "~2.0.0",
     "tslint": "~4.5.0",
     "typescript": "~2.2.0",
+    "uuid": "^3.1.0",
     "zone.js": "^0.8.4"
   },
   "devDependencies": {

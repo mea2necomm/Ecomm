@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {UsersService} from "../../../services/users.service";
+//const uuidv1 = require('uuid/v1');
+//import * as uuidv1 from 'uuid/v1.js';
+
+//import * as nodemailer from 'nodemailer';
 
 @Component({
   selector: 'app-resetpassword',
@@ -8,6 +12,7 @@ import {UsersService} from "../../../services/users.service";
 })
 export class ResetpasswordComponent implements OnInit {
   private users:any = null;
+  private modalmessage:string = "";
   constructor(private userservice:UsersService ) { }
 
   ngOnInit() {
@@ -20,6 +25,26 @@ export class ResetpasswordComponent implements OnInit {
         console.log("users not found");
       }
     });
+  }
+
+  resetpwd(user){
+    console.log(user);
+    //console.log(uuidv1());
+    console.log(window.location.origin);
+
+    this.userservice.resetPassword(user.email).subscribe(info => {
+      if(info){
+        console.log(info);
+        this.modalmessage = "Resent email sent to user";
+
+      }else{
+        console.log("Unable to send reset email");
+         this.modalmessage = "Unable to send reset email";
+      }
+    });
+
+
+
   }
 
 }
