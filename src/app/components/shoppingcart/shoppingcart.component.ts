@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ShoppingcartService } from '../../services/shoppingcart.service';
+import { PaymentService} from "../../services/payment.service";
+
 import {SearchQuery} from "../../models/SearchQuery";
 import { Router } from '@angular/router';
 @Component({
@@ -9,19 +11,28 @@ import { Router } from '@angular/router';
 })
 export class ShoppingcartComponent implements OnInit {
 
-
+  pricing:any=null;
   cartitems: any = [];
   cartnumber: number;
-  price: number;
+  //price: number;
   total: number;
 
   constructor(
     private cartservice : ShoppingcartService,
+    private paymentservice: PaymentService,
     private router : Router
   ) { }
 
   ngOnInit() {
-    this.price = this.cartservice.getPricePerYear();
+    //this.price = this.cartservice.getPricePerYear();
+
+    this.paymentservice.getPricing().subscribe(pricing => {
+      if(pricing){
+        this.pricing = pricing;
+      }
+      console.log("the pricing object:");
+      console.log(pricing);
+    });
 
     this.cartservice.getShoppingCart().subscribe(usercartitems => {
       if(usercartitems){
@@ -59,9 +70,37 @@ export class ShoppingcartComponent implements OnInit {
   totalprice(){
     var total = 0;
     for(var i = 0; i < this.cartitems.length; i++){
-      total+= (this.cartitems[i].toYear - this.cartitems[i].fromYear + 1) * this.price;
+      //console.log(this.cartitems[i]);
+      //total+= (this.cartitems[i].toYear - this.cartitems[i].fromYear + 1) * this.price;
+      total+= this.itemprice(this.cartitems[i]);
     }
     return total;
+  }
+
+  daydiff(first, second) {
+  return Math.round((second-first)/(1000*60*60*24));
+  }
+
+  itemprice(item){
+    var itemprice = 0;
+    if(item.state == "State"){
+      itemprice = this.pricing.countryPrice;
+    }else if(item.city == "City"){
+      itemprice = this.pricing.statePrice;
+    }else{
+      itemprice = this.pricing.cityPrice;
+    }
+    var fromdate = new Date(item.fromYear,item.fromMonth,item.fromDay);
+    var todate = new Date(item.toYear,item.toMonth,item.toDay);
+    var noofdays = this.daydiff(fromdate,todate);
+
+    var priceperday = itemprice/365;
+    var totalprice = priceperday*noofdays;
+    if (totalprice > this.pricing.minPrice)
+      return (totalprice);
+    else
+      return(this.pricing.minPrice);
+
   }
 
   checkout(){

@@ -14,6 +14,7 @@ import {LogoutComponent} from "./components/common/logout.component";
 import {InstructionsComponent} from "./components/common/instructions.component";
 import {PricingComponent} from "./components/common/pricing.component";
 import {InfoComponent} from "./components/common/info.component";
+import {PricechangerComponent} from "./components/admin/pricechanger/pricechanger.component";
 
 export const routes: Routes = [
   {
@@ -82,6 +83,10 @@ export const routes: Routes = [
   {
     path: 'pricing',
     component: PricingComponent
+  },
+  {
+    path: 'pricechanger',
+    component: PricechangerComponent
   },
   {
     path: 'info',

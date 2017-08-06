@@ -23,7 +23,7 @@
         <td *ngIf="item.city != 'City'">{{item.city}}</td>
         <td *ngIf="item.city == 'City'">No city selected</td>
         <td>{{item.fromMonth}}/{{item.fromDay}}/{{item.fromYear}}&nbsp;-&nbsp;{{item.toMonth}}/{{item.toDay}}/{{item.toYear}} </td>
-        <td>{{price*(item.toYear-item.fromYear+1) | currency:'USD':true:'.2-4'}}</td>
+        <td>{{itemprice(item) | currency:'USD':true:'.2'}}</td>
         <td class="text-center"><button type="button" class="close text-center" (click)="removefromcart(i)" aria-hidden="true">&times;</button></td>
       </tr>
       <tr class="info">
@@ -31,7 +31,7 @@
         <td></td>
         <td></td>
         <td>Total:</td>
-        <td>{{total | currency:'USD':true:'.2-4'}}</td>
+        <td>{{total | currency:'USD':true:'.2'}}</td>
         <td></td>
       </tr>
       </tbody>
