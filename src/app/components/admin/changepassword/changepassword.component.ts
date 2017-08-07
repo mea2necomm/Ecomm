@@ -40,7 +40,7 @@ export class ChangepasswordComponent implements OnInit {
     this.userservice.updatePassword(this.requesteduuid,pass).subscribe(result =>{
       if(result){
         console.log(result);
-        this.updateresult = "Successful!";
+        this.updateresult = "Successfully changed password";
       }else{
         console.log("Error while changing password");
         this.updateresult = "Unsuccessful";
