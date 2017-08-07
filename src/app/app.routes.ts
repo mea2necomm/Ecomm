@@ -16,7 +16,8 @@ import {PricingComponent} from "./components/common/pricing.component";
 import {InfoComponent} from "./components/common/info.component";
 import {PricechangerComponent} from "./components/admin/pricechanger/pricechanger.component";
 import {ResetpasswordComponent} from './components/admin/resetpassword/resetpassword.component';
-import {ChangepasswordComponent} from './components/admin/changepassword/changepassword.component'
+import {ChangepasswordComponent} from './components/admin/changepassword/changepassword.component';
+import {ResetrequestComponent} from './components/resetrequest/resetrequest.component';
 
 export const routes: Routes = [
   {
@@ -101,6 +102,10 @@ export const routes: Routes = [
   {
     path: 'info',
     component: InfoComponent
+  },
+  {
+    path: 'resetrequest',
+    component: ResetrequestComponent
   }
 
 ];

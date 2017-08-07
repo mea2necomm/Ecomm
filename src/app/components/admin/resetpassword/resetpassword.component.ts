@@ -35,7 +35,7 @@ export class ResetpasswordComponent implements OnInit {
     this.userservice.resetPassword(user.email).subscribe(info => {
       if(info){
         console.log(info);
-        this.modalmessage = "Resent email sent to user";
+        this.modalmessage = "Reset email sent to user";
 
       }else{
         console.log("Unable to send reset email");

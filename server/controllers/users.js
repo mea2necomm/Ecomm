@@ -78,8 +78,8 @@ module.exports.changePassword = function(req,res){
     .exec(function(err, user) {
       if (!user) {
         console.log("user not found");
-        sendJSONresponse(res, 404, {
-          "message": "User not found"
+        sendJSONresponse(res, 200, {
+          "message": "No Information"
         });
         return;
       } else if (err) {
@@ -113,7 +113,7 @@ module.exports.changePassword = function(req,res){
 
 module.exports.resetPassword = function(req,res){
   console.log('resetPassword called');
-  getAuthor(req,res,function(req, res, username) {
+  //getAuthor(req,res,function(req, res, username) {
     console.log(req.body);
     if(!req.body.useremail) {
       console.log("Error while resetting password: User email needed");
@@ -123,76 +123,82 @@ module.exports.resetPassword = function(req,res){
       return;
     }
 
-    console.log("sending reset password mail..." + req.body.useremail);
-    // console.log(JSON.stringify(req.body));
 
-    /*send reset email*/
 
-    var transporter = nodemailer.createTransport({
-      service: 'Gmail',
-      auth: {
-        user: 'mea2nmailer@gmail.com', // Your email id
-        pass: 'starfishwhite' // Your password
-      }
-    });
-
-    var host = req.get('host');
     var tempuuid = uuidv1();
-    var tempurl = 'http://' +host + '/changepassword/' + tempuuid;
-    var text = 'The password has been reset for <b>' + req.body.useremail + '</b>. Follow the link below to create a new password<br/>';
 
-    text += '<a href="'+ tempurl+ '">'+tempurl + '</a><br/>';
+  /*update database with new ssid*/
+  User
+    .findOne({ email : req.body.useremail })
+    .exec(function(err, user) {
+      if (!user) {
+        console.log("user not found");
+        sendJSONresponse(res, 200, {
+          "message": "No Information"
+        });
+        return;
+      } else if (err) {
+        console.log(err);
+        sendJSONresponse(res, 200, {
+          "message": "No Information"
+        });
+        return;
+      }
+      console.log("user found");
+      user.resetuuid = tempuuid;
+      user.resetdate = new Date();
 
-    var mailOptions = {
-      from: 'mea2nmailer@gmail.com', // sender address
-      to: req.body.useremail, // list of receivers
-      subject: 'Reset Password Link from holiday shop' , // Subject line
-      html: text //, // plaintext body
-      // html: '<b>Hello world ✔</b>' // You can choose to send an HTML body instead
-    };
+      user.save(function(err){
+        if(err){
+          console.log("error while saving reset info to database");
+        }else{
+          console.log("saved reset info to database successfully");
 
-    transporter.sendMail(mailOptions, function(error, info){
-      if(error){
-        console.log(error);
+          //now sending email
+          /*send reset email*/
+          console.log("sending reset password mail..." + req.body.useremail);
 
-        sendJSONresponse(res,404,error);
-      }else{
-        console.log('Message sent: ' + info.response);
-        sendJSONresponse(res,200,info.response);
-      };
+          var transporter = nodemailer.createTransport({
+            service: 'Gmail',
+            auth: {
+              user: 'mea2nmailer@gmail.com', // Your email id
+              pass: 'starfishwhite' // Your password
+            }
+          });
+
+          var host = req.get('host');
+
+          var tempurl = 'http://' +host + '/changepassword/' + tempuuid;
+          var text = 'The password has been reset for <b>' + req.body.useremail + '</b>. Follow the link below to create a new password<br/>';
+
+          text += '<a href="'+ tempurl+ '">'+tempurl + '</a><br/>';
+
+          var mailOptions = {
+            from: 'mea2nmailer@gmail.com', // sender address
+            to: req.body.useremail, // list of receivers
+            subject: 'Reset Password Link from holiday shop' , // Subject line
+            html: text //, // plaintext body
+            // html: '<b>Hello world ✔</b>' // You can choose to send an HTML body instead
+          };
+
+          transporter.sendMail(mailOptions, function(error, info){
+            if(error){
+              console.log(error);
+
+              sendJSONresponse(res,404,error);
+            }else{
+              console.log('Message sent: ' + info.response);
+              sendJSONresponse(res,200,info.response);
+            };
+          });
+
+          /*end send email*/
+        }
+      });
     });
 
-    /*end send email*/
 
-    /*update database with new ssid*/
-    User
-      .findOne({ email : req.body.useremail })
-      .exec(function(err, user) {
-        if (!user) {
-          console.log("user not found");
-          sendJSONresponse(res, 404, {
-            "message": "User not found"
-          });
-          return;
-        } else if (err) {
-          console.log(err);
-          sendJSONresponse(res, 404, err);
-          return;
-        }
-        console.log("user found");
-        user.resetuuid = tempuuid;
-        user.resetdate = new Date();
-
-        user.save(function(err){
-          if(err){
-            console.log("error while saving reset info to database");
-          }else{
-            console.log("saved reset info to database successfully");
-          }
-        });
-      });
-
-  })
+  //})
 };
 
 var getAuthor = function(req, res, callback) {

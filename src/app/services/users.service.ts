@@ -29,17 +29,17 @@ export class UsersService {
 
   resetPassword(useremail){
 
-    if(this.authenticationService.isLoggedIn()){
+    //if(this.authenticationService.isLoggedIn()){
 
       let headers = new Headers({ 'Content-Type': 'application/json', 'Accept': 'application/json' });
-      headers.append('Authorization', 'Bearer '+ this.authenticationService.getToken());
+      //headers.append('Authorization', 'Bearer '+ this.authenticationService.getToken());
       let options = new RequestOptions({ headers: headers });
 
       // returning observable to calling component
 
       return this.http.post('/api/resetpassword' ,JSON.stringify({ useremail: useremail,reset:true }),options )
         .map(res => res.json());
-    }
+    //}
   }
 
   getUserByUUID(uuid){

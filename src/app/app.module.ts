@@ -33,6 +33,7 @@ import { PricechangerComponent } from './components/admin/pricechanger/pricechan
 import {UsersService} from './services/users.service';
 import { ResetpasswordComponent } from './components/admin/resetpassword/resetpassword.component';
 import { ChangepasswordComponent } from './components/admin/changepassword/changepassword.component';
+import { ResetrequestComponent } from './components/resetrequest/resetrequest.component';
 
 
 // Define the routes
@@ -57,7 +58,8 @@ import { ChangepasswordComponent } from './components/admin/changepassword/chang
     InfoComponent,
     PricechangerComponent,
     ResetpasswordComponent,
-    ChangepasswordComponent
+    ChangepasswordComponent,
+    ResetrequestComponent
   ],
   imports: [
     BrowserModule,

@@ -29,6 +29,9 @@ export class LoginComponent implements OnInit {
   register(){
     this.router.navigate(['/register'], { queryParams: { returnUrl: this.returnUrl }});
   }
+  forgotpassword(){
+    this.router.navigate(['/resetrequest'], { queryParams: { returnUrl: this.returnUrl }});
+  }
   login() {
     this.loading = true;
     this.authenticationService.login(this.model.useremail, this.model.password)

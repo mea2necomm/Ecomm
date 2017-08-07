@@ -143,7 +143,7 @@ router.get('/pricing/', pricing.getPricing);
 
 router.get('/users/', auth, ctrlUsers.getUsers);
 
-router.post('/resetpassword',auth,ctrlUsers.resetPassword);
+router.post('/resetpassword',ctrlUsers.resetPassword);
 
 router.get('/uuiduser/:requesteduuid',ctrlUsers.getUserByUUID);
 

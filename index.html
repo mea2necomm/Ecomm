@@ -1,0 +1,42 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Mea2necomm</title>
+  <base href="/">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+   <link rel="stylesheet" type="text/css" src="bower_components/bootstrap/dist/css/bootstrap.min.css" >
+   <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/united/bootstrap.min.css">
+
+	<script type="text/javascript" src="bower_components/jquery/dist/jquery.min.js"></script>
+   <script type="text/javascript" src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+
+</head>
+<body>
+
+
+  <app-root>Loading...</app-root>
+
+<script type="text/javascript">
+  var selectionbarseen = false;
+    $(document).ready(function(){
+        //$('#selectionbar').hide();
+        selectionbarseen = true;
+    });
+
+    $('#btnholidaysearch').click(function(e){
+        e.preventDefault();
+        if(selectionbarseen){
+            $('#selectionbar').hide();
+            selectionbarseen = false;
+        }else {
+            $('#selectionbar').show();
+            selectionbarseen = true;
+        }
+    });
+</script>
+<script type="text/javascript" src="inline.bundle.js"></script><script type="text/javascript" src="polyfills.bundle.js"></script><script type="text/javascript" src="styles.bundle.js"></script><script type="text/javascript" src="vendor.bundle.js"></script><script type="text/javascript" src="main.bundle.js"></script></body>
+</html>
