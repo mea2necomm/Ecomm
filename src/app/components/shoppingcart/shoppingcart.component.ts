@@ -32,18 +32,18 @@ export class ShoppingcartComponent implements OnInit {
       }
       console.log("the pricing object:");
       console.log(pricing);
+      this.cartservice.getShoppingCart().subscribe(usercartitems => {
+        if(usercartitems){
+          console.log("shopping cart component");
+          console.log(usercartitems);
+        }
+        this.cartitems = usercartitems;
+        this.total = this.totalprice();
+        //console.log("shoppingcart component: " + this.cartitems[0].country);
+      });
     });
 
-    this.cartservice.getShoppingCart().subscribe(usercartitems => {
-      if(usercartitems){
-        console.log("shopping cart component");
-        console.log(usercartitems);
-      }
 
-      this.cartitems = usercartitems;
-      this.total = this.totalprice();
-      //console.log("shoppingcart component: " + this.cartitems[0].country);
-    });
 
     console.log(this.total);
   }
