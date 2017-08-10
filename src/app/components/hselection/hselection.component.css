@@ -1,3 +1,7 @@
+
+li {
+  cursor:default;
+}
 .scrollable-menu {
   height: auto;
   max-height: 200px;
