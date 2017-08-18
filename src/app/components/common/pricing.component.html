@@ -1,5 +1,5 @@
 <app-navbar></app-navbar>
-<div class="container well well-lg ">
+<div *ngIf="pricing" class="container well well-lg ">
 
   <h4>Pricing Details.</h4>
   Price Per Country Per Year:$ {{pricing.countryPrice}} <br/>
